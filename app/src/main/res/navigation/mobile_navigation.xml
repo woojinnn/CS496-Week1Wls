@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.week1wls.ui.home.HomeFragment"
+        android:name="com.example.week1wls.ui.contact.ContactFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_contact" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

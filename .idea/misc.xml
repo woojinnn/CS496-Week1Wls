@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_contact.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_dashboard.xml" value="0.371875" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_notifications.xml" value="0.21822916666666667" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/phone_layout.xml" value="0.38645833333333335" />
       </map>
     </option>
   </component>
