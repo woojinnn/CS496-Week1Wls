@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.Gallery.InputFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/inputText"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:hint="Search Tag!!!"
+            android:inputType="text">
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/srhBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@id/inputText"
+            android:layout_marginLeft="10dp"
+            android:text="search">
+        </Button>
+
+        <Button
+            android:id="@+id/addBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintStart_toEndOf="@id/srhBtn"
+            android:text="Add">
+        </Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

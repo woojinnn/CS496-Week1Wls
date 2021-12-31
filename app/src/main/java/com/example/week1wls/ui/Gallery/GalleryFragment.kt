@@ -1,9 +1,16 @@
 package com.example.week1wls.ui.Gallery
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,13 +42,6 @@ class GalleryFragment : Fragment() {
             adapter = GalleryAdapter()
         }
 
-        /* input 받기 */
-        // 버튼 눌렸을 때
-        srhBtn.setOnClickListener {
-            input = inputText.text.toString()
-            inputText.text = null
-            findMyTag(input)
-        }
     }
 
     override fun onDestroyView() {
@@ -49,13 +49,4 @@ class GalleryFragment : Fragment() {
         _binding = null
     }
 
-    fun findMyTag(input: String){
-        val count = GalleryAdapter().dataList.size
-        for(i: Int in 1..count){
-            if (GalleryAdapter().dataList[i].tag == input){
-                srhBtn.text = "find"
-            }
-        }
-
-    }
 }

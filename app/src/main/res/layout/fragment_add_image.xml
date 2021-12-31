@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="60dp"
-    tools:context=".ui.Gallery.GalleryFragment">
+    tools:context=".ui.Gallery.AddImageFragment">
     <!--
     <TextView
         android:id="@+id/text_gallery"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/imageList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
