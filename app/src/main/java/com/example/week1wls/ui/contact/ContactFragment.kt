@@ -1,30 +1,30 @@
 package com.example.week1wls.ui.contact
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week1wls.R
 import kotlinx.android.synthetic.main.fragment_contact.*
+import kotlinx.android.synthetic.main.fragment_contact.view.*
 
 class ContactFragment : Fragment() {
     private val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
-    private lateinit var adapter:ProfileAdapter
-    private var list = mutableListOf<Profile>()
+    private lateinit var adapter:ContactAdapter
+    private var list = mutableListOf<ContactItem>()
     var searchText = ""
     private var sortText = "asc"
 
@@ -33,13 +33,20 @@ class ContactFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_contact, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_contact, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        addContact.setOnClickListener{
+            val intent = Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI)
+            startActivity(intent)
+        }
+
         checkAndStart()
+
+
     }
 
     override fun onDestroyView() {
@@ -54,7 +61,7 @@ class ContactFragment : Fragment() {
 
     private fun setList() {
         list.addAll(getPhoneNumbers(sortText, searchText))
-        adapter = ProfileAdapter(list)
+        adapter = ContactAdapter(list)
         recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter
     }
@@ -87,9 +94,9 @@ class ContactFragment : Fragment() {
         this.adapter.notifyDataSetChanged()
     }
 
-    fun getPhoneNumbers(sort:String, searchName:String?) : List<Profile> {
+    fun getPhoneNumbers(sort:String, searchName:String?) : List<ContactItem> {
         // return value
-        val list = mutableListOf<Profile>()
+        val list = mutableListOf<ContactItem>()
 
         // 1.1. Contact Uri
         val addressUri = ContactsContract.Contacts.CONTENT_URI
@@ -122,7 +129,7 @@ class ContactFragment : Fragment() {
             val name = cursor?.getString(1)
             var number = cursor?.getString(2)
             // 개별 전화번호 데이터 생성
-            val phone = Profile(id, name, number)
+            val phone = ContactItem(id, name, number)
             // 결과목록에 더하기
             list.add(phone)
         }

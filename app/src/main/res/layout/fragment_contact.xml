@@ -13,9 +13,19 @@
         android:ems="10"
         android:hint="Search"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/addContact"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/addContact"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:src="@drawable/addperson"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editSearch"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -46,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        tools:listitem="@layout/profile_item_layout" />
+        tools:listitem="@layout/item_contact" />
 
 <!--    <TextView-->
 <!--        android:id="@+id/text_home"-->
