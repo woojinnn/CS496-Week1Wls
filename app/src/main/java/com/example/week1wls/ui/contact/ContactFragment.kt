@@ -2,6 +2,7 @@ package com.example.week1wls.ui.contact
 
 import android.Manifest
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -19,7 +20,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week1wls.R
 import kotlinx.android.synthetic.main.fragment_contact.*
-import kotlinx.android.synthetic.main.fragment_contact.view.*
 
 class ContactFragment : Fragment() {
     private val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
@@ -39,14 +39,7 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addContact.setOnClickListener{
-            val intent = Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI)
-            startActivity(intent)
-        }
-
         checkAndStart()
-
-
     }
 
     override fun onDestroyView() {
@@ -55,15 +48,29 @@ class ContactFragment : Fragment() {
 
     private fun startProcess() {
         setList()
+        setAddContactListener()
         setSearchListener()
         setRadioListener()
     }
 
     private fun setList() {
         list.addAll(getPhoneNumbers(sortText, searchText))
-        adapter = ContactAdapter(list)
+        adapter = ContactAdapter(list, requireContext())
         recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter
+    }
+
+    private fun setAddContactListener() {
+        // add contact button
+        addContact.setOnClickListener {
+            val intent = Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI)
+            startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        changeList()
     }
 
     private fun setSearchListener() {
@@ -110,24 +117,25 @@ class ContactFragment : Fragment() {
             ContactsContract.CommonDataKinds.Phone.NUMBER
         )
         // 2.2 조건 정의
-        var wheneClause:String? = null
-        var whereValues:Array<String>? = null
+        var where:String? = null
+        var values:Array<String>? = null
         // searchName에 값이 있을 때만 검색을 사용한다
         if(searchName?.isNotEmpty() ?: false) {
-            wheneClause = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ?"
-            whereValues = arrayOf("%$searchName%")
+            where = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ?"
+            values = arrayOf("%$searchName%")
         }
         // 2.3 정렬쿼리 사용
         val optionSort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " $sort"
 
         // 3. 테이블에서 주소록 데이터 쿼리
-        val cursor = requireActivity().contentResolver.query(phoneUri, projections, wheneClause, whereValues, optionSort)
+        val cursor = requireActivity().contentResolver.query(phoneUri, projections, where, values, optionSort)
 
         // 4. 반복문으로 아이디와 이름을 가져오면서 전화번호 조회 쿼리를 한번 더 돌린다.
         while(cursor?.moveToNext()?:false) {
-            val id = cursor?.getString(0)
-            val name = cursor?.getString(1)
-            var number = cursor?.getString(2)
+            val id = cursor?.getString(0)   // CONTACT_ID
+            val name = cursor?.getString(1) // DISPLAY_NAME
+            var number = cursor?.getString(2)   // NUMBER
+
             // 개별 전화번호 데이터 생성
             val phone = ContactItem(id, name, number)
             // 결과목록에 더하기
