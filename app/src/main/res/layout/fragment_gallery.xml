@@ -33,11 +33,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <EditText
+            android:id="@+id/inputText"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:hint="Search Tag!!!"
+            android:inputType="text"></EditText>
+
+        <Button
+            android:id="@+id/srhBtn"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@id/inputText"
+            android:text="search"></Button>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="60dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 

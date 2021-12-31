@@ -10,10 +10,10 @@ import com.example.week1wls.R
 class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
     var dataList: ArrayList<GalleryData> = arrayListOf(
-        GalleryData(R.drawable.cat1),
-        GalleryData(R.drawable.cat2),
-        GalleryData(R.drawable.cat3),
-        GalleryData(R.drawable.cat4)
+        GalleryData(R.drawable.cat1, "tag1"),
+        GalleryData(R.drawable.cat2, "tag2"),
+        GalleryData(R.drawable.cat3, "tag3"),
+        GalleryData(R.drawable.cat4, "tag4")
     )
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

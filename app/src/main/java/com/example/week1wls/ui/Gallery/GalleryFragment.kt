@@ -18,6 +18,7 @@ class GalleryFragment : Fragment() {
     private val binding get() = _binding!!
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>? = null
+    lateinit var input : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,10 +34,28 @@ class GalleryFragment : Fragment() {
             layoutManager = GridLayoutManager(activity, 2)
             adapter = GalleryAdapter()
         }
+
+        /* input 받기 */
+        // 버튼 눌렸을 때
+        srhBtn.setOnClickListener {
+            input = inputText.text.toString()
+            inputText.text = null
+            findMyTag(input)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun findMyTag(input: String){
+        val count = GalleryAdapter().dataList.size
+        for(i: Int in 1..count){
+            if (GalleryAdapter().dataList[i].tag == input){
+                srhBtn.text = "find"
+            }
+        }
+
     }
 }
