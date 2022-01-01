@@ -8,18 +8,13 @@ import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.week1wls.R
-import kotlinx.android.synthetic.main.fragment_contact.view.*
-import kotlinx.android.synthetic.main.item_contact.*
 import kotlinx.android.synthetic.main.item_contact.view.*
-import android.content.ContentResolver
-import java.lang.Exception
 
 
 class ContactAdapter(private val list:List<ContactItem>, val context: Context): RecyclerView.Adapter<Holder>() {
@@ -86,7 +81,7 @@ class Holder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
                                     openContactsEdit(contactId.toString())
                                 }
 //                                ContactFragment.changeList()
-                                Toast.makeText(itemView.context, actionArr[which], Toast.LENGTH_LONG).show()
+                                Toast.makeText(itemView.context, actionArr[which], Toast.LENGTH_SHORT).show()
                             }
 
                             "삭제" -> {

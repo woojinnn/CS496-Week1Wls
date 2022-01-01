@@ -2,7 +2,6 @@ package com.example.week1wls.ui.contact
 
 import android.Manifest
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -19,9 +18,12 @@ import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week1wls.R
-import kotlinx.android.synthetic.main.fragment_contact.*
+import com.example.week1wls.databinding.FragmentContactBinding
 
 class ContactFragment : Fragment() {
+    private var _binding: FragmentContactBinding? = null
+    private val binding get() = _binding!!
+
     private val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     private lateinit var adapter:ContactAdapter
     private var list = mutableListOf<ContactItem>()
@@ -33,7 +35,8 @@ class ContactFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_contact, container, false)
+        _binding = FragmentContactBinding.inflate(inflater, container, false)
+        return _binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,6 +47,7 @@ class ContactFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
     }
 
     private fun startProcess() {
@@ -56,13 +60,13 @@ class ContactFragment : Fragment() {
     private fun setList() {
         list.addAll(getPhoneNumbers(sortText, searchText))
         adapter = ContactAdapter(list, requireContext())
-        recycler.layoutManager = LinearLayoutManager(requireContext())
-        recycler.adapter = adapter
+        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.recycler.adapter = adapter
     }
 
     private fun setAddContactListener() {
         // add contact button
-        addContact.setOnClickListener {
+        binding.addContact.setOnClickListener {
             val intent = Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI)
             startActivity(intent)
         }
@@ -74,7 +78,7 @@ class ContactFragment : Fragment() {
     }
 
     private fun setSearchListener() {
-        editSearch.addTextChangedListener(object: TextWatcher {
+        binding.editSearch.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -85,7 +89,7 @@ class ContactFragment : Fragment() {
     }
 
     private fun setRadioListener() {
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId) {
                 R.id.radioAsc -> sortText = "asc"
                 R.id.radioDsc -> sortText = "desc"
