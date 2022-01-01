@@ -10,10 +10,11 @@ import com.example.week1wls.R
 import kotlinx.android.synthetic.main.item_add_image.view.*
 import kotlinx.android.synthetic.main.item_gallery.view.*
 
-class AddImageAdapter(var imageList : ArrayList<AddImageData>) : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
+class AddImageAdapter : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
 
     //lateinit var imageList: ArrayList<AddImageData>
-    /*
+    //var imageList : ArrayList<AddImageData>
+    //var imageList : ArrayList<AddImageData>
     // for UI test
     var imageList: ArrayList<AddImageData> = arrayListOf(
         AddImageData(R.drawable.cat1),
@@ -22,23 +23,26 @@ class AddImageAdapter(var imageList : ArrayList<AddImageData>) : RecyclerView.Ad
         AddImageData(R.drawable.cat4)
     )
 
-     */
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             // url 읽어서 넣기
             // Glide.with(itemView).load(item.img).into(itemView.image)
-        /*
+
         // for UI test
         var addimage: ImageView
+
         init {
             addimage = itemView.findViewById(R.id.addimage)
         }
 
-         */
+
+        /*
         fun setItem(item: AddImageData) {
-            Glide.with(itemView).load(item.img).into(itemView.addimage)
+            //Glide.with(itemView).load(item.img).into(itemView.addimage)
+            addimage = itemView.findViewById(R.id.addimage)
         }
+
+         */
 
     }
 
@@ -48,8 +52,12 @@ class AddImageAdapter(var imageList : ArrayList<AddImageData>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
+        /*
         val item = imageList[i]
         viewHolder.setItem(item)
+
+         */
+        viewHolder.addimage.setImageResource(imageList[i].img)
     }
 
     override fun getItemCount(): Int {

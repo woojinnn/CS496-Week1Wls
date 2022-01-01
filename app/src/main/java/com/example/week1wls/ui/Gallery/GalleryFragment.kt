@@ -44,7 +44,6 @@ class GalleryFragment : Fragment() {
             layoutManager = GridLayoutManager(activity, 2)
             adapter = GalleryAdapter()
         }
-
         /* input 받기 */
         // search 버튼 눌렸을 때
         srhBtn.setOnClickListener {

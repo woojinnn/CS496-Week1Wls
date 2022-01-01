@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.week1wls.databinding.ActivityMainBinding
 import com.example.week1wls.ui.Gallery.AddImageAdapter
@@ -46,20 +47,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-       // setListener()
-
     }
-    /*
-    private fun setListener(){
-        binding.apply {
-            searchIcon.also {
-                it.isSubmitButtonEnabled = true
-                it.setOnQueryTextListener(OnQueryTextListener())
-            }
-        }
-    }
-
-     */
 
 
     // addImageFragment 에서 image 선택 시 발생 이벤트
@@ -68,25 +56,47 @@ class MainActivity : AppCompatActivity() {
         //var image = ImageView(this)
         //image.setImageResource(this.)
         //image = view.findViewById(R.id.addimage)
-
         var inputTag = EditText(this)
-
         inputTag.setHint("원하는 Tag 입력해라...")
         inputTag.inputType = InputType.TYPE_CLASS_TEXT
+
+        var inputMemo = EditText(this)
+        inputMemo.setHint("원하는 Memo 입력해라...")
+        inputMemo.inputType = InputType.TYPE_CLASS_TEXT
 
         //var img = this.
         val builder = AlertDialog.Builder(this)
         builder.setTitle("tag 입력")
             .setView(inputTag)
+            .setView(inputMemo)
             .setPositiveButton("저장", { dialog, id ->
                 val tag = inputTag.text.toString()
+                val memo = inputMemo.text.toString()
                 // 개망했네....
-                GalleryAdapter().dataList.add(GalleryData(R.drawable.cat1, "tag", "좃댐"))
+                var item = GalleryData(R.drawable.cat1, "tag", "좃댐")
+                GalleryAdapter().dataList.add(item)
+                //GalleryAdapter().dataList.add(GalleryData(R.drawable.cat1, "tag", "좃댐"))
             })
             .setNegativeButton("취소", { dialog, id ->
                 //
             })
         builder.show()
+        GalleryAdapter()
     }
 
+    // GalleryFragment 에서 image 선택 시 발생 이벤트
+    fun showTagMemo(){
+        var image = ImageView(this)
+        // view -> index 받는거 제발
+        image.setImageResource(GalleryAdapter().dataList[0].img)
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("고양이...보고싶단")
+            .setView(image)
+            .setPositiveButton("수정", { dialog, id ->
+                // tag + memo 수정 이벤트
+            })
+        builder.show()
+
+    }
 }

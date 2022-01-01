@@ -18,6 +18,7 @@
             android:layout_height="150dp"
             android:id="@+id/image"
             android:scaleType="fitXY"
+            android:onClick="showTagMemo"
             android:src="@drawable/cat1"/>
         <!--
         <TextView

@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.week1wls.MainActivity
 import com.example.week1wls.R
 
-class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
+class GalleryAdapter() : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     /*
     var dataList: ArrayList<GalleryData> = arrayListOf(
         GalleryData(R.drawable.cat1, "tag1"),
@@ -17,7 +18,9 @@ class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     )
 
      */
-    lateinit var dataList: ArrayList<GalleryData>
+    var dataList: ArrayList<GalleryData> = arrayListOf(
+        GalleryData(R.drawable.cat1, "tag1", "menoooo")
+    )
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
