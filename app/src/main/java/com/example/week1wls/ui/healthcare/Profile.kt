@@ -1,0 +1,14 @@
+package com.example.week1wls.ui.healthcare
+
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Profile(
+    val name: String,
+    val height: Int,
+    val weight: Int,
+    val age: Int,
+    val isMale: Boolean,
+    val bmr: Double
+    ): Parcelable
