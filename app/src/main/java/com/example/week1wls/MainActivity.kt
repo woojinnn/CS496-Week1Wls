@@ -46,7 +46,21 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+       // setListener()
+
     }
+    /*
+    private fun setListener(){
+        binding.apply {
+            searchIcon.also {
+                it.isSubmitButtonEnabled = true
+                it.setOnQueryTextListener(OnQueryTextListener())
+            }
+        }
+    }
+
+     */
+
 
     // addImageFragment 에서 image 선택 시 발생 이벤트
     fun chooseImage(view: View){

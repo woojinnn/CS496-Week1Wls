@@ -17,6 +17,7 @@ import com.example.week1wls.R
 import kotlinx.android.synthetic.main.fragment_add_image.*
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.fragment_input.*
+import kotlinx.android.synthetic.main.item_add_image.*
 import org.jsoup.Jsoup
 import java.lang.Exception
 
@@ -39,60 +40,45 @@ class AddImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //doTask("https://pixabay.com/images/search/cat/")
-
-        // for test
-        imageList.apply {
-            layoutManager = GridLayoutManager(activity, 2)
-            adapter = AddImageAdapter()
+        // start 버튼 눌렸을 때
+        srtBtn.setOnClickListener{
+            doTask("https://pixabay.com/images/search/cat/")
+            imageList.layoutManager = GridLayoutManager(activity, 2)
         }
         // next 버튼 눌렸을 때
         nextBtn.setOnClickListener{
             findNavController().navigate(R.id.action_navigation_gallery_add_image_to_navigation_gallery)
         }
 
+        // for test
+        imageList.layoutManager = GridLayoutManager(activity, 2)
+
+
     }
 
-    /*
-    fun chooseImage(view: View){
 
-        // 선택 시 border 색 변화, 체크 표시 등의 UI 변화 필요
-        var image = ImageView(context)
-        //image.setImageResource(view.img)
-        var inputTag : String
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("tag 입력")
-            .setView(image)
-            .setPositiveButton("저장", { dialog, which ->
-                val textView : TextView = view.findViewById(R.id.inputText)
-                inputTag = textView.text.toString()
-                //GalleryAdapter().dataList.add(GalleryData(image, inputTag))
-            })
-            .setNegativeButton("취소", { dialog, which ->
-                //
-            })
-        builder.show()
-    }
-
-     */
-
-    /*
     fun doTask(url: String) {
+        var documentTitle : String = ""
+        var itemList : ArrayList<AddImageData> = arrayListOf()
+
         try {
             var doc = Jsoup.connect(url).get()
-            var elements = doc.select("div.container--3NC_b a")
+            var elements = doc.select("div.container--3NC_b")
 
-            for(e in elements){
-                var imgUrl = e.absUrl("src")
+            for (e in elements) {
+                var imgUrl = e.select("a.link--h3bPW").attr("src")
                 Log.d("TTT", imgUrl)
-                AddImageAdapter().imageList.add(AddImageData(imgUrl))
-            }
 
-        } catch (e : Exception) {
+                var item = AddImageData(imgUrl)
+                itemList.add(item)
+            }
+            documentTitle = doc.title()
+        } catch (e: Exception) {
         }
+
+        imageList.adapter = AddImageAdapter(itemList)
 
     }
 
-     */
 
 }
