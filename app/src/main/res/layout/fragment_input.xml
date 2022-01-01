@@ -1,41 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
     tools:context=".ui.Gallery.InputFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/Title"
+        android:text="Cat Gallery"
+        android:textSize="30dp"
+        android:textColor="@color/purple_700"></TextView>
 
-        <EditText
-            android:id="@+id/inputText"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:hint="Search Tag!!!"
-            android:inputType="text">
-            <requestFocus />
-        </EditText>
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        android:text="Add"></Button>
 
-        <Button
-            android:id="@+id/srhBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            app:layout_constraintStart_toEndOf="@id/inputText"
-            android:layout_marginLeft="10dp"
-            android:text="search">
-        </Button>
-
-        <Button
-            android:id="@+id/addBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintStart_toEndOf="@id/srhBtn"
-            android:text="Add">
-        </Button>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</LinearLayout>

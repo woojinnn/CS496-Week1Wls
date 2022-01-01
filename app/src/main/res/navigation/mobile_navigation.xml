@@ -18,6 +18,26 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
+        android:id="@+id/navigation_gallery_input"
+        android:name="com.example.week1wls.ui.Gallery.InputFragment"
+        android:label="@string/Input"
+        tools:layout="@layout/fragment_input" >
+        <action
+            android:id="@+id/action_navigation_gallery_input_to_navigation_gallery_add_image"
+            app:destination="@id/navigation_gallery_add_image" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_gallery_add_image"
+        android:name="com.example.week1wls.ui.Gallery.AddImageFragment"
+        android:label="@string/addImage"
+        tools:layout="@layout/fragment_add_image" >
+        <action
+            android:id="@+id/action_navigation_gallery_add_image_to_navigation_gallery"
+            app:destination="@id/navigation_gallery" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.week1wls.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"

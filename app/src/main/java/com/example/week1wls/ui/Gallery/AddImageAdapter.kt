@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.week1wls.R
 
-class AddImageAdapter(var items: ArrayList<AddImageData>) : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
+class AddImageAdapter() : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
+
+    lateinit var imageList: ArrayList<AddImageData>
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun setItem(item: AddImageData) {
@@ -17,16 +19,16 @@ class AddImageAdapter(var items: ArrayList<AddImageData>) : RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddImageAdapter.ViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_gallery, parent, false)
+        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_add_image, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        var item = items[i]
+        var item = imageList[i]
         //holder.setItem(item)
     }
 
     override fun getItemCount(): Int {
-        return items.count()
+        return imageList.count()
     }
 }
