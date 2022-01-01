@@ -7,25 +7,39 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.week1wls.R
+import kotlinx.android.synthetic.main.item_gallery.view.*
 
 class AddImageAdapter() : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
 
-    lateinit var imageList: ArrayList<AddImageData>
+    //lateinit var imageList: ArrayList<AddImageData>
+    // for UI test
+    var imageList: ArrayList<AddImageData> = arrayListOf(
+        AddImageData(R.drawable.cat1),
+        AddImageData(R.drawable.cat2),
+        AddImageData(R.drawable.cat3),
+        AddImageData(R.drawable.cat4)
+    )
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun setItem(item: AddImageData) {
-            //Glide.with(itemView).load(item.img).into(itemView.img)
+
+            // url 읽어서 넣기
+            // Glide.with(itemView).load(item.img).into(itemView.image)
+
+        // for UI test
+        var addimage: ImageView
+        init {
+            addimage = itemView.findViewById(R.id.addimage)
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddImageAdapter.ViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_add_image, parent, false)
-        return ViewHolder(view)
+        var itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_add_image, parent, false)
+        return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        var item = imageList[i]
-        //holder.setItem(item)
+        viewHolder.addimage.setImageResource(imageList[i].img)
     }
 
     override fun getItemCount(): Int {

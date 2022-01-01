@@ -71,9 +71,9 @@ class GalleryFragment : Fragment() {
                 val builder = AlertDialog.Builder(context)
                 builder.setTitle("찾음!!!!")
                     .setView(image)
-                    .setPositiveButton("저장",
+                    .setPositiveButton("확인",
                         {dialog, id ->
-                        // 저장 버튼 클릭 이벤트 추가
+                        // 확인 버튼 클릭 이벤트 추가
                         //addImage(tag) : tag 변수로 입력 받기
 
                         })

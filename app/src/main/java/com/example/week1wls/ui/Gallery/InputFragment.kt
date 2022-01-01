@@ -42,36 +42,8 @@ class InputFragment : Fragment() {
         /* Crawling */
         // add 버튼 눌렸을 떄
         addBtn.setOnClickListener {
-            /*
-            doTask("https://pixabay.com/images/search/cat/")
-            recyclerView.apply {
-                layoutManager = GridLayoutManager(activity, 2)
-                adapter = AddImageAdapter()
-            }
-
-             */
             findNavController().navigate(R.id.action_navigation_gallery_input_to_navigation_gallery_add_image)
         }
     }
 
-    // 이미지 저장
-    fun addImage(tag: String) {
-
-    }
-
-    fun doTask(url: String) {
-        try {
-            var doc = Jsoup.connect(url).get()
-            var elements = doc.select("div.container--3NC_b a")
-
-            for(e in elements){
-                var imgUrl = e.absUrl("src")
-                Log.d("TTT", imgUrl)
-                AddImageAdapter().imageList.add(AddImageData(imgUrl))
-            }
-
-        } catch (e : Exception) {
-        }
-
-    }
 }

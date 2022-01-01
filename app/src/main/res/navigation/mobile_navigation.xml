@@ -15,7 +15,11 @@
         android:id="@+id/navigation_gallery"
         android:name="com.example.week1wls.ui.Gallery.GalleryFragment"
         android:label="@string/title_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_navigation_gallery_to_navigation_gallery_add_image"
+            app:destination="@id/navigation_gallery_add_image" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_gallery_input"
@@ -35,6 +39,9 @@
         <action
             android:id="@+id/action_navigation_gallery_add_image_to_navigation_gallery"
             app:destination="@id/navigation_gallery" />
+        <action
+            android:id="@+id/action_navigation_gallery_add_image_to_navigation_gallery_input"
+            app:destination="@id/navigation_gallery_input" />
     </fragment>
 
     <fragment

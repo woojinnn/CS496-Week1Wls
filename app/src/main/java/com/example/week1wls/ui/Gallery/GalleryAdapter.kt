@@ -8,13 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.week1wls.R
 
 class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
-
+    /*
     var dataList: ArrayList<GalleryData> = arrayListOf(
         GalleryData(R.drawable.cat1, "tag1"),
         GalleryData(R.drawable.cat2, "tag2"),
         GalleryData(R.drawable.cat3, "tag3"),
         GalleryData(R.drawable.cat4, "tag4")
     )
+
+     */
+    lateinit var dataList: ArrayList<GalleryData>
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
