@@ -1,5 +1,7 @@
 package com.example.week1wls.ui.healthcare
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,9 +15,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.week1wls.R
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_healthcare_login.*
 
 class LoginFragment : Fragment() {
+    private lateinit var profileCache: SharedPreferences
+    private lateinit var gson: Gson
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,6 +33,16 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        profileCache = requireActivity().getSharedPreferences("profileCache", MODE_PRIVATE)
+        gson = GsonBuilder().create()
+
+        val savedProfile = profileCache.getString("profileCache", "")
+        if(!savedProfile.equals("")) {
+            return findNavController().navigate(R.id.navigation_healthcare_main)
+        }
+
+        Log.d("loginfragment", "onViewCreated1")
+
         btn_Done.setOnClickListener{
             // Check empty field
             if(et_name.text.toString() == "" ||
@@ -36,8 +53,8 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
             val name = et_name.text.toString()
-            val height = et_height.text.toString().toInt()
-            val weight = et_weight.text.toString().toInt()
+            val height = et_height.text.toString().toDouble()
+            val weight = et_weight.text.toString().toDouble()
             val age = et_age.text.toString().toInt()
             val isMale = when (radiogroup_sex.checkedRadioButtonId) {
                 R.id.radioMan -> true
@@ -53,15 +70,12 @@ class LoginFragment : Fragment() {
 
             val profile = Profile(name, height, weight, age, isMale, bmr)
 
-            // Pass profile as bundle
-            val healthcareMainfrag = MainFragment()
-            val bundle = Bundle()
-            bundle.putParcelable("profile", profile)
-            healthcareMainfrag.arguments = bundle
-
-            val action = LoginFragmentDirections.actionNavigationNotificationsToNavigationHealthcareMain(profile)
-            findNavController().navigate(action)
-            //            findNavController().navigate(R.id.navigation_healthcare_main, bundle)
+            // Pass profile as shared Preference
+            val spEditor = profileCache.edit()
+            val profileStr = gson.toJson(profile, Profile::class.java)
+            spEditor.putString("profileCache", profileStr)
+            spEditor.commit()
+            findNavController().navigate(R.id.navigation_healthcare_main)
         }
     }
 

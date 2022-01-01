@@ -21,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:hint="키"
-        android:inputType="numberPassword"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_name" />
@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:hint="몸무게"
-        android:inputType="numberPassword"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_height" />
