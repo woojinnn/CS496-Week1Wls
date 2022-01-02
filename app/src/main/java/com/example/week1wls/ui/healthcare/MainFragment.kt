@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.week1wls.R
-import com.example.week1wls.ui.dashboard.DashboardViewModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
