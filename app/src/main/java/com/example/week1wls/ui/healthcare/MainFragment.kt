@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.week1wls.R
 import com.github.mikephil.charting.animation.Easing
@@ -87,6 +88,12 @@ class MainFragment: Fragment() {
         pieChart.invalidate()
 
         // Edit profile button
+        btn_editProfile.setOnClickListener{
+            val editor = profileCache.edit()
+            editor.clear()
+            editor.commit()
+            findNavController().navigate(R.id.action_navigation_healthcare_main_to_navigation_notifications)
+        }
 
 
 //        /* input 받기 */

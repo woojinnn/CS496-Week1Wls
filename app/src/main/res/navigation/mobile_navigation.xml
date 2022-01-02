@@ -60,6 +60,9 @@
         tools:layout="@layout/fragment_healthcare_main" >
         <argument android:name="profile"
             app:argType="com.example.week1wls.ui.healthcare.Profile" />
+        <action
+            android:id="@+id/action_navigation_healthcare_main_to_navigation_notifications"
+            app:destination="@id/navigation_notifications" />
     </fragment>
 
 </navigation>
