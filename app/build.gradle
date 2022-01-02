@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+
+    // safe args
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -32,8 +36,12 @@ android {
     }
     /* for crawling */
     buildFeatures {
-        dataBinding = true
+        dataBinding true
         viewBinding true
+    }
+    // parcelable
+    androidExtensions {
+        experimental = true
     }
 }
 
@@ -68,4 +76,5 @@ dependencies {
     //async
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5"
 
+    implementation 'com.google.code.gson:gson:2.8.9'
 }

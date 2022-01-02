@@ -22,9 +22,9 @@ import com.example.week1wls.ui.Gallery.GalleryAdapter
 import com.example.week1wls.ui.Gallery.GalleryData
 import kotlinx.android.synthetic.main.item_add_image.*
 import kotlinx.android.synthetic.main.item_gallery.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +39,12 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_gallery_input, R.id.navigation_notifications
-            )
+
+//            setOf(
+//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,
+//                R.id.navigation_healthcare_main
+//            )
+            navController.graph
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)

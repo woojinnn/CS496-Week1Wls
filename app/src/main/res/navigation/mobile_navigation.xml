@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.week1wls.ui.home.HomeFragment"
+        android:name="com.example.week1wls.ui.contact.ContactFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_contact" />
 
     <fragment
         android:id="@+id/navigation_gallery"
@@ -46,7 +46,20 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.week1wls.ui.notifications.NotificationsFragment"
+        android:name="com.example.week1wls.ui.healthcare.LoginFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_healthcare_login" >
+        <action
+            android:id="@+id/action_navigation_notifications_to_navigation_healthcare_main"
+            app:destination="@id/navigation_healthcare_main" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_healthcare_main"
+        android:name="com.example.week1wls.ui.healthcare.MainFragment"
+        tools:layout="@layout/fragment_healthcare_main" >
+        <argument android:name="profile"
+            app:argType="com.example.week1wls.ui.healthcare.Profile" />
+    </fragment>
+
 </navigation>
