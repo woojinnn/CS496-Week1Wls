@@ -22,7 +22,6 @@ import com.example.week1wls.ui.Gallery.GalleryAdapter
 import com.example.week1wls.ui.Gallery.GalleryData
 import kotlinx.android.synthetic.main.item_add_image.*
 import kotlinx.android.synthetic.main.item_gallery.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -51,8 +50,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
     }
-
-
+    /*
     // addImageFragment 에서 image 선택 시 발생 이벤트
     fun chooseImage(view: View){
         // 선택 시 border 색 변화, 체크 표시 등의 UI 변화 필요
@@ -100,6 +98,10 @@ class MainActivity : AppCompatActivity() {
                 // tag + memo 수정 이벤트
             })
         builder.show()
-
     }
+
+     */
+
+    // for pie chart
+
 }

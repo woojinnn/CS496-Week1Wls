@@ -18,9 +18,7 @@ class GalleryAdapter() : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     )
 
      */
-    var dataList: ArrayList<GalleryData> = arrayListOf(
-        GalleryData(R.drawable.cat1, "tag1", "menoooo")
-    )
+    lateinit var dataList: MutableList<GalleryData>
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
