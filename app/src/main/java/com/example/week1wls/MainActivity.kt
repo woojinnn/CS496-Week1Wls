@@ -6,15 +6,22 @@ import android.text.InputType
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.week1wls.databinding.ActivityMainBinding
+import com.example.week1wls.ui.Gallery.AddImageAdapter
+import com.example.week1wls.ui.Gallery.AddImageFragment
 import com.example.week1wls.ui.Gallery.GalleryAdapter
 import com.example.week1wls.ui.Gallery.GalleryData
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.item_add_image.*
+import kotlinx.android.synthetic.main.item_gallery.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -43,8 +50,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
     }
-
-
+    /*
     // addImageFragment 에서 image 선택 시 발생 이벤트
     fun chooseImage(view: View){
         // 선택 시 border 색 변화, 체크 표시 등의 UI 변화 필요
@@ -92,6 +98,10 @@ class MainActivity : AppCompatActivity() {
                 // tag + memo 수정 이벤트
             })
         builder.show()
-
     }
+
+     */
+
+    // for pie chart
+
 }
