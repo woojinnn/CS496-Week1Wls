@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
     }
-    /*
+
     // addImageFragment 에서 image 선택 시 발생 이벤트
     fun chooseImage(view: View){
         // 선택 시 border 색 변화, 체크 표시 등의 UI 변화 필요
@@ -101,9 +101,4 @@ class MainActivity : AppCompatActivity() {
             })
         builder.show()
     }
-
-     */
-
-    // for pie chart
-
 }
