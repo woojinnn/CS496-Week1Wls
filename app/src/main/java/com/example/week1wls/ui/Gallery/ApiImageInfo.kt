@@ -1,5 +1,6 @@
 package com.example.week1wls.ui.Gallery
 
+import android.util.Log
 import com.example.week1wls.ui.healthcare.FoodData
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -47,6 +48,7 @@ class ApiImageInfo(private val keyName: String): Thread() {
 
         for (i in 0 until 1) {
             val jObject = items.getJSONObject(i)
+            Log.d("item", jObject.toString())
 
             val imageID = JSON_Parse(jObject, "id")
             if (imageID == "no data") {

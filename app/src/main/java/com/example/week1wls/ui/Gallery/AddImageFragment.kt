@@ -18,7 +18,6 @@ import com.example.week1wls.R
 import com.example.week1wls.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.fragment_add_image.*
 import kotlinx.android.synthetic.main.fragment_gallery.*
-import kotlinx.android.synthetic.main.fragment_input.*
 import kotlinx.android.synthetic.main.item_add_image.*
 import org.jsoup.Jsoup
 import java.lang.Exception
@@ -88,21 +87,19 @@ class AddImageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //set adapter for image List
+        ImageList.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            adapter = AddImageAdapter(context)
+            Log.d("test", "tttt")
+        }
+        addImageadapter = AddImageAdapter(requireContext())
+        //ImageList.adapter = addImageadapter
 
         // next 버튼 눌렸을 때
         nextBtn.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_gallery_add_image_to_navigation_gallery)
         }
-        //set adapter for image List
-        ImageList.apply {
-            layoutManager = GridLayoutManager(activity, 2)
-            adapter = AddImageAdapter(context)
-        }
-        addImageadapter = AddImageAdapter(requireContext())
-        //ImageList.adapter = addImageadapter
-
-
-
 
         //setImage()
         /* input 받기 */

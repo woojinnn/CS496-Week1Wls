@@ -8,7 +8,7 @@
         android:title="@string/title_contact" />
 
     <item
-        android:id="@+id/navigation_gallery_input"
+        android:id="@+id/navigation_gallery_add_image"
         android:enabled="true"
         android:icon="@drawable/ic_gallery"
         android:title="@string/title_gallery" />
