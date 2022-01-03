@@ -11,5 +11,5 @@ data class Profile(
     val age: Int,
     val isMale: Boolean,
     val bmr: Double,
-    val total: Int
+    val total: Double
     ): Parcelable
