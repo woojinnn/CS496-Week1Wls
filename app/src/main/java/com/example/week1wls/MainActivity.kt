@@ -1,27 +1,13 @@
 package com.example.week1wls
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.text.InputType
-import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.week1wls.databinding.ActivityMainBinding
-import com.example.week1wls.ui.Gallery.AddImageAdapter
-import com.example.week1wls.ui.Gallery.AddImageFragment
-import com.example.week1wls.ui.Gallery.GalleryAdapter
-import com.example.week1wls.ui.Gallery.GalleryData
-import kotlinx.android.synthetic.main.item_add_image.*
-import kotlinx.android.synthetic.main.item_gallery.*
 import android.view.Window
 
 class MainActivity : AppCompatActivity() {

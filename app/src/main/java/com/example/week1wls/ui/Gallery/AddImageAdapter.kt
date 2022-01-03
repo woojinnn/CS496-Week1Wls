@@ -18,7 +18,6 @@ import com.example.week1wls.R
 import com.example.week1wls.ui.healthcare.HealthAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_add_image.view.*
-import kotlinx.android.synthetic.main.item_gallery.view.*
 
 class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
 
@@ -66,9 +65,9 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
         private val vtag: TextView = itemView.addtag
 
         fun bind(imageItem: AddImageData) {
-           //Glide.with(context).load(imageItem.imageURL).into(vimage)
-            Log.d("test2222", "ffff")
-            vimage.setImageResource(R.drawable.cat1)
+           Glide.with(context).load(imageItem.imageURL).into(vimage)
+            //Log.d("test2222", "ffff")
+            //vimage.setImageResource(R.drawable.cat1)
             //Glide.with(context).load(imageItem.imageURL).dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL).into(vimage)
             //Picasso.get().load(imageItem.imageURL).into(vimage)
             vtag.text = imageItem.tags

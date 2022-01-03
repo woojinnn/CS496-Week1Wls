@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide
 import com.example.week1wls.R
 import com.example.week1wls.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.fragment_add_image.*
-import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.item_add_image.*
 import org.jsoup.Jsoup
 import java.lang.Exception
@@ -61,12 +60,11 @@ import kotlinx.android.synthetic.main.item_add_image.view.*
 
 class AddImageFragment : Fragment() {
 
-    private lateinit var profileCache: SharedPreferences
     private lateinit var gson: Gson
     private lateinit var imgData: AddImageData
     lateinit var input: String
     private lateinit var addImageadapter: AddImageAdapter
-    private var layoutManager: RecyclerView.LayoutManager? = null
+    //private var layoutManager: RecyclerView.LayoutManager? = null
     lateinit var List: MutableList<AddImageData>
 
     override fun onCreateView(
@@ -75,10 +73,6 @@ class AddImageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        profileCache = requireActivity().getSharedPreferences(
-            "profileCache",
-            Context.MODE_PRIVATE
-        )
         gson = GsonBuilder().create()
 
         val view = inflater.inflate(R.layout.fragment_add_image, container, false)
@@ -87,19 +81,18 @@ class AddImageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //set adapter for image List
+        //set adapter for image List\
+        /*
         ImageList.apply {
-            layoutManager = GridLayoutManager(activity, 2)
-            adapter = AddImageAdapter(context)
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = AddImageAdapter(requireContext())
             Log.d("test", "tttt")
         }
-        addImageadapter = AddImageAdapter(requireContext())
-        //ImageList.adapter = addImageadapter
 
-        // next 버튼 눌렸을 때
-        nextBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_gallery_add_image_to_navigation_gallery)
-        }
+         */
+        ImageList.layoutManager = GridLayoutManager(requireContext(), 2)
+        addImageadapter = AddImageAdapter(requireContext())
+        ImageList.adapter = addImageadapter
 
         //setImage()
         /* input 받기 */
@@ -120,6 +113,7 @@ class AddImageFragment : Fragment() {
         }
 
         // 사진 터치 (다른 이벤트)
+        /*
         addImageadapter.setOnItemClickListener(object : AddImageAdapter.OnItemClickListener {
             override fun onItemClick(v: View, imageData: AddImageData, pos: Int) {
                 val newImgData = AddImageData(imgData.pageURL, imgData.tags, imgData.imageURL, imgData.views, imgData.downloads, imgData.likes)
@@ -134,6 +128,7 @@ class AddImageFragment : Fragment() {
             }
 
         })
+        */
     }
     /*
     private fun setImage() {
@@ -147,12 +142,11 @@ class AddImageFragment : Fragment() {
         val imageStr = profileCache.getString("profileCache", "")
         imgData = gson.fromJson(imageStr, AddImageData::class.java)
     }
-*/
     private fun setImageTexts() {
         addtag.text = imgData.tags
         Glide.with(requireContext()).load(imgData.imageURL).into(addimage)
     }
-
+    */
 
 
 

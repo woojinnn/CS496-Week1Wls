@@ -78,26 +78,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="end">
-
-        <Button
-            android:id="@+id/srtBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="start">
-
-        </Button>
-        <Button
-            android:id="@+id/nextBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="next"
-            app:layout_constraintStart_toEndOf="@id/srtBtn">
-        </Button>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 </LinearLayout>

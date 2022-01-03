@@ -46,7 +46,7 @@ class ApiImageInfo(private val keyName: String): Thread() {
         // return value
         val imageArr = mutableListOf<AddImageData>()
 
-        for (i in 0 until 1) {
+        for (i in 0 until 20) {
             val jObject = items.getJSONObject(i)
             Log.d("item", jObject.toString())
 
@@ -57,7 +57,7 @@ class ApiImageInfo(private val keyName: String): Thread() {
 
             val pageURL = JSON_Parse(jObject, "pageURL")
             val tags = JSON_Parse(jObject, "tags")
-            val imageURL = JSON_Parse(jObject, "previewURL")
+            val imageURL = JSON_Parse(jObject, "largeImageURL")
             val views = JSON_Parse(jObject, "views").toInt()
             val downloads = JSON_Parse(jObject, "downloads").toInt()
             val likes = JSON_Parse(jObject, "likes").toInt()
