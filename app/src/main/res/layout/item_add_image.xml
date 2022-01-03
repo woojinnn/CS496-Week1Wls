@@ -20,6 +20,13 @@
             android:scaleType="fitXY"
             android:onClick="chooseImage"
             android:src="@drawable/cat2"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/addtag"
+            android:text = "#고양이"
+            android:scaleType="fitXY" />
         <!--
         <TextView
             android:layout_width="match_parent"

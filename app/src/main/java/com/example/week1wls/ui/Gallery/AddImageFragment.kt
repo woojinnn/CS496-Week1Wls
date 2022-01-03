@@ -30,6 +30,8 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import android.content.Intent
 import android.app.Activity
 import android.content.ContentResolver
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -51,27 +53,34 @@ import androidx.core.content.ContentResolverCompat.query
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week1wls.ui.contact.ContactAdapter
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_contact.*
 
 
 class AddImageFragment : Fragment() {
 
+    private lateinit var profileCache: SharedPreferences
+    private lateinit var gson: Gson
+    private lateinit var imgData: AddImageData
     lateinit var input: String
-    private var adapter: RecyclerView.Adapter<AddImageAdapter.ViewHolder>? = null
+    private lateinit var addImageadapter: AddImageAdapter
     private var layoutManager: RecyclerView.LayoutManager? = null
-    var PICK_IMAGE = 1111
-    var REQ_STORAGE_PERMISSION = 99
-    var List = arrayListOf<AddImageData>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    lateinit var List: ArrayList<AddImageData>
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_add_image, container, false)
+
+        profileCache = requireActivity().getSharedPreferences(
+            "profileCache",
+            Context.MODE_PRIVATE
+        )
+        gson = GsonBuilder().create()
+
+        val view = inflater.inflate(R.layout.fragment_add_image, container, false)
         return view
     }
 
@@ -82,28 +91,86 @@ class AddImageFragment : Fragment() {
         nextBtn.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_gallery_add_image_to_navigation_gallery)
         }
+        //set adapter for image List
+        addImageadapter = AddImageAdapter(requireContext())
+        imageList.adapter = addImageadapter
+
+        setImage()
+        /* input 받기 */
+        // 이미지 검색
+        srhQBtn.setOnClickListener {
+            input = inputQ.text.toString()
+
+            val thread = ApiImageInfo(input)
+            thread.start()
+            thread.join()
+            List = thread.List
+            Log.d("Images", List.toString())
+            addImageadapter.data = List
+            addImageadapter.notifyDataSetChanged()
+
+            inputQ.setText("")
+        }
+
+        addImageadapter.setOnItemClickListener(object : AddImageAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, imageData: AddImageData, pos: Int) {
+                val newImgData = AddImageData(imgData.img, imgData.tag)
+                val spEditor = profileCache.edit()
+                val imgDataStr = gson.toJson(newImgData, AddImageData::class.java)
+                spEditor.putString("profileCache", imgDataStr)
+                spEditor.commit()
+                setImage()
+
+                addImageadapter.data.clear()
+                addImageadapter.notifyDataSetChanged()
+            }
+
+        })
+    }
+
+    private fun setImage() {
+        getImageInfo()
+
+        setImageTexts()
+    }
+
+    //get image information (image, tag)
+    private fun getImageInfo() {
+        val imageStr = profileCache.getString("profileCache", "")
+        imgData = gson.fromJson(imageStr, AddImageData::class.java)
+    }
+
+    private fun setImageTexts() {
+        addimage.setImageURI(imgData.img)
+        addtag.text = imgData.tag
+    }
+
+
+
+
+
 
         // start 버튼 눌렸을 때
         //srtBtn.setOnClickListener {
-            //doTask("https://pixabay.com/images/search/cat/")
+        //doTask("https://pixabay.com/images/search/cat/")
 
-            pickFromGallery()
+        //pickFromGallery()
 
-            imageList.apply {
-                layoutManager = GridLayoutManager(activity, 2)
-                adapter = AddImageAdapter(List)
-            }
-
-            //imageList.layoutManager = GridLayoutManager(activity, 2)
+        //imageList.apply {
+        //   layoutManager = GridLayoutManager(activity, 2)
+        //   adapter = AddImageAdapter(List)
         //}
 
-    }
+        //imageList.layoutManager = GridLayoutManager(activity, 2)
+        //}
+
 
     override fun onDestroyView() {
         super.onDestroyView()
     }
+}
 
-
+    /*
     private fun pickFromGallery() {
         var writePermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
         var readPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -142,7 +209,9 @@ class AddImageFragment : Fragment() {
             List.add(AddImageData(addimage))
         }
     }
-    /*
+
+
+
     fun doTask(url: String) {
         var documentTitle : String = ""
         var itemList : ArrayList<AddImageData> = arrayListOf()
@@ -170,7 +239,4 @@ class AddImageFragment : Fragment() {
         imageList.adapter = AddImageAdapter(itemList)
 
         }
-
      */
-
-}
