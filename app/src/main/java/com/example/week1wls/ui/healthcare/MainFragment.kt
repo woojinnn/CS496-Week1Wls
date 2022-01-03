@@ -26,7 +26,7 @@ class MainFragment: Fragment() {
     private lateinit var profileCache: SharedPreferences
     private lateinit var gson: Gson
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<HealthAdapter.ViewHolder>? = null
+    //private var adapter: RecyclerView.Adapter<HealthAdapter.ViewHolder>? = null
     lateinit var input : String
 
 
@@ -80,7 +80,7 @@ class MainFragment: Fragment() {
         // linear layout
         foodList.apply{
             layoutManager = LinearLayoutManager(activity)
-            adapter = HealthAdapter()
+            //adapter = HealthAdapter() error
         }
     }
 }
