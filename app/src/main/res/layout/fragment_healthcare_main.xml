@@ -137,7 +137,7 @@
                     android:layout_height="60dp"
                     android:gravity="center"
                     android:hint="(g)"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:fontFamily="@font/g_medium"
                     app:layout_constraintEnd_toStartOf="@id/btn_searchFood"
                     app:layout_constraintStart_toEndOf="@id/et_inputFood"

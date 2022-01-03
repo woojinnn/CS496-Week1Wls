@@ -102,8 +102,6 @@ class MainFragment: Fragment() {
                 }
                 et_inputWeight.setText("")
 
-                Log.d("weight", weight.toString())
-
                 // update foodHistory
                 foodHistory.forEach {
                     if(it.name == foodData.name) {
@@ -144,6 +142,23 @@ class MainFragment: Fragment() {
                 .setItems(
                     foodNames.toTypedArray(), object : DialogInterface.OnClickListener {
                         override fun onClick(dialog: DialogInterface, which: Int) {
+
+                            // update foodHistory
+                            foodHistory.removeAt(which)
+
+                            // update sharedPreference
+                            val spEditor = foodHistoryCache.edit()
+                            val type = object: TypeToken<MutableList<FoodData>>() {}
+                            val foodHistoryStr = gson.toJson(foodHistory, type.type)
+                            spEditor.putString("foodHistoryCache", foodHistoryStr)
+                            spEditor.commit()
+
+                            // update foodHistory
+                            updateFoodHistory()
+
+                            setPieChart()
+
+                            dialog.dismiss()
                         }
                     }
                 ).create().show()
