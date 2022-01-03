@@ -1,5 +1,6 @@
 package com.example.week1wls.ui.Gallery
 
+import android.Manifest
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
@@ -24,13 +25,43 @@ import java.lang.Exception
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import androidx.core.app.ActivityCompat.startActivityForResult
+
+import android.content.Intent
+import android.app.Activity
+import android.content.ContentResolver
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.os.CancellationSignal
+import android.provider.CalendarContract.Attendees.query
+import android.provider.ContactsContract
+import android.provider.MediaStore
+import android.provider.MediaStore.Video.query
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.ActivityResultCallback
+
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentResolverCompat.query
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.week1wls.ui.contact.ContactAdapter
+import kotlinx.android.synthetic.main.fragment_contact.*
+
 
 class AddImageFragment : Fragment() {
 
     lateinit var input: String
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private var adapter: RecyclerView.Adapter<AddImageAdapter.ViewHolder>? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
+    var PICK_IMAGE = 1111
+    var REQ_STORAGE_PERMISSION = 99
+    var List = arrayListOf<AddImageData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,29 +71,76 @@ class AddImageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_add_image, container, false)
-
+        val view =  inflater.inflate(R.layout.fragment_add_image, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        imageList.apply {
-            layoutManager = GridLayoutManager(activity, 2)
-            adapter = AddImageAdapter()
-        }
         // next 버튼 눌렸을 때
-        nextBtn.setOnClickListener{
+        nextBtn.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_gallery_add_image_to_navigation_gallery)
         }
 
-        /*
         // start 버튼 눌렸을 때
-        srtBtn.setOnClickListener{
-            doTask("https://pixabay.com/images/search/cat/")
-            imageList.layoutManager = GridLayoutManager(activity, 2)
+        //srtBtn.setOnClickListener {
+            //doTask("https://pixabay.com/images/search/cat/")
+
+            pickFromGallery()
+
+            imageList.apply {
+                layoutManager = GridLayoutManager(activity, 2)
+                adapter = AddImageAdapter(List)
+            }
+
+            //imageList.layoutManager = GridLayoutManager(activity, 2)
+        //}
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
+
+    private fun pickFromGallery() {
+        var writePermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        var readPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+
+        if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED)
+        { // 권한 없어서 요청
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), REQ_STORAGE_PERMISSION)
+        } else { // 권한 있음
+            var intent = Intent(Intent.ACTION_PICK)
+            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            intent.type = "image/*"
+            startActivityForResult(intent, PICK_IMAGE)
         }
-         */
+
+        //val intent = Intent(Intent.ACTION_PICK)
+        //intent.type = "image/*"
+        //intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        //startActivityForResult(intent, PICK_IMAGE)
+        //registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            if (data == null) {
+                return
+            }
+            val selectedImage: Uri? = data.data
+            //addimage = view.findViewById(R.id.addimage)
+            // into 뒤 null 문제..
+            //Glide.with(requireContext()).load(selectedImage).into(requireView().findViewById(R.id.addimage))
+            //List.add(AddImageData(addimage))
+            //AddImageAdapter(List)
+            addimage.setImageURI(selectedImage)
+            List.add(AddImageData(addimage))
+        }
     }
     /*
     fun doTask(url: String) {
@@ -92,6 +170,7 @@ class AddImageFragment : Fragment() {
         imageList.adapter = AddImageAdapter(itemList)
 
         }
+
      */
 
 }

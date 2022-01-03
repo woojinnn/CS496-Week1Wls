@@ -22,12 +22,14 @@ import com.example.week1wls.ui.Gallery.GalleryAdapter
 import com.example.week1wls.ui.Gallery.GalleryData
 import kotlinx.android.synthetic.main.item_add_image.*
 import kotlinx.android.synthetic.main.item_gallery.*
+import android.view.Window
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
