@@ -1,6 +1,8 @@
 package com.example.week1wls.ui.healthcare
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -8,9 +10,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.week1wls.R
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
@@ -19,10 +21,13 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_healthcare_main.*
 
 class MainFragment: Fragment() {
     private lateinit var profileCache: SharedPreferences
+    private lateinit var foodHistoryCache: SharedPreferences
+    private lateinit var foodHistory: MutableList<FoodData>
     private lateinit var gson: Gson
     private lateinit var profile: Profile
     private lateinit var healthAdapter: HealthAdapter
@@ -39,6 +44,12 @@ class MainFragment: Fragment() {
             "profileCache",
             Context.MODE_PRIVATE
         )
+
+        foodHistoryCache = requireActivity().getSharedPreferences(
+            "foodHistoryCache",
+            Context.MODE_PRIVATE
+        )
+
         gson = GsonBuilder().create()
 
         return inflater.inflate(R.layout.fragment_healthcare_main, container, false)
@@ -51,6 +62,7 @@ class MainFragment: Fragment() {
         healthAdapter = HealthAdapter(requireContext())
         rv_foodList.adapter = healthAdapter
 
+        updateFoodHistory()
         setProfile()
 
         // Edit profile button
@@ -58,6 +70,10 @@ class MainFragment: Fragment() {
             val editor = profileCache.edit()
             editor.clear()
             editor.apply()
+
+            val foodEditor = foodHistoryCache.edit()
+            foodEditor.clear()
+            foodEditor.apply()
             findNavController().navigate(R.id.action_navigation_healthcare_main_to_navigation_notifications)
         }
 
@@ -70,7 +86,6 @@ class MainFragment: Fragment() {
             thread.start()
             thread.join()
             foodList = thread.foodList
-            Log.d("foods", foodList.toString())
             healthAdapter.data = foodList
             healthAdapter.notifyDataSetChanged()
 
@@ -80,13 +95,38 @@ class MainFragment: Fragment() {
         // 음식 리스트 터치됐을 때
         healthAdapter.setOnItemClickListener(object: HealthAdapter.OnItemClickListener {
             override fun onItemClick(v: View, foodData: FoodData, pos: Int) {
-                // update profile
-                val newProfile = Profile(profile.name, profile.height, profile.weight, profile.age, profile.isMale, profile.bmr, profile.total + foodData.NUTR_CONT1)
-                val spEditor = profileCache.edit()
-                val profileStr = gson.toJson(newProfile, Profile::class.java)
-                spEditor.putString("profileCache", profileStr)
+                val weight = if(et_inputWeight.text.toString() != "") {
+                    et_inputWeight.text.toString().toFloat()
+                } else {
+                    foodData.SERVING_WT.toFloat()
+                }
+                et_inputWeight.setText("")
+
+                Log.d("weight", weight.toString())
+
+                // update foodHistory
+                foodHistory.forEach {
+                    if(it.name == foodData.name) {
+                        val prevCnt = it.weight
+                        it.weight = prevCnt + weight
+                    }
+                }
+                if(foodHistory.find {it.name == foodData.name } == null) {
+                    // if the element was not in foodData
+                    foodHistory.add(foodData.copy(weight = weight))
+                }
+
+                // update sharedPreference
+                val spEditor = foodHistoryCache.edit()
+                val type = object: TypeToken<MutableList<FoodData>>() {}
+                val foodHistoryStr = gson.toJson(foodHistory, type.type)
+                spEditor.putString("foodHistoryCache", foodHistoryStr)
                 spEditor.commit()
-                setProfile()
+
+                // update foodHistory
+                updateFoodHistory()
+
+                setPieChart()
 
                 // clear recyclerView contents
                 healthAdapter.data.clear()
@@ -94,6 +134,20 @@ class MainFragment: Fragment() {
             }
         })
 
+        // show daily report
+        btn_dailyReport.setOnClickListener {
+            val foodNames = mutableListOf<String>()
+            for (food in foodHistory) {
+                foodNames.add("${food.name} ${food.weight}g (${food.NUTR_CONT1 / food.SERVING_WT * food.weight})kcal")
+            }
+            AlertDialog.Builder(requireContext())
+                .setItems(
+                    foodNames.toTypedArray(), object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface, which: Int) {
+                        }
+                    }
+                ).create().show()
+        }
     }
 
     private fun setProfile() {
@@ -109,6 +163,16 @@ class MainFragment: Fragment() {
         profile = gson.fromJson(profileStr, Profile::class.java)
     }
 
+    private fun updateFoodHistory() {
+        val foodHistoryStr = foodHistoryCache.getString("foodHistoryCache", "")
+        if(foodHistoryStr == "") {
+            foodHistory = mutableListOf<FoodData>()
+        } else {
+            val type = object: TypeToken<MutableList<FoodData>>() {}
+            foodHistory = gson.fromJson(foodHistoryStr, type.type) as MutableList<FoodData>
+        }
+    }
+
     private fun setProfileTexts() {
         tv_name.text = profile.name
         if(profile.isMale)
@@ -120,11 +184,12 @@ class MainFragment: Fragment() {
 
     private fun setPieChart() {
         // Pie chart
+        pieChart.setTouchEnabled(true)
         pieChart.setUsePercentValues(true)
 
         val pieEntries = ArrayList<PieEntry>()
-        pieEntries.add(PieEntry(profile.total.toFloat(),"Current"))
-        val remainingCal = if(profile.bmr > profile.total) (profile.bmr - profile.total).toFloat() else 0.toFloat()
+        pieEntries.add(PieEntry(totalCalories(),"Current"))
+        val remainingCal = if(profile.bmr > totalCalories()) (profile.bmr - totalCalories()).toFloat() else 0.toFloat()
         pieEntries.add(PieEntry(remainingCal, "Total")) // Remaining
 
         val pieDataset = PieDataSet(pieEntries, "")
@@ -136,7 +201,7 @@ class MainFragment: Fragment() {
         pieChart.legend.isEnabled = false
         pieChart.description.isEnabled = false
         pieChart.setDrawEntryLabels(false)
-        pieChart.centerText = "${profile.total.toInt()} / ${profile.bmr.toInt()}"
+        pieChart.centerText = "${totalCalories().toInt()} / ${profile.bmr.toInt()}"
         pieChart.setCenterTextColor(Color.BLACK)
         pieChart.setCenterTextSize(10f)
         pieChart.animateY(1400, Easing.EaseInOutQuad)
@@ -145,15 +210,17 @@ class MainFragment: Fragment() {
         pieChart.invalidate()
     }
 
+    private fun totalCalories(): Float {
+        var totalCal = 0.toFloat()
+
+        for (food in foodHistory) {
+            totalCal += food.weight * (food.NUTR_CONT1 / food.SERVING_WT).toFloat()
+        }
+
+        return totalCal
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
     }
-
-//    fun findFood(input: String){
-//        // linear layout
-//        foodList.apply{
-//            layoutManager = LinearLayoutManager(activity)
-//            adapter = HealthAdapter()
-//        }
-//    }
 }

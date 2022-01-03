@@ -12,5 +12,6 @@ data class FoodData(
     val NUTR_CONT7: Double, // 콜레스테롤 (mg)
     val NUTR_CONT8: Double, // 포화지방산 (g)
     val NUTR_CONT9: Double, // 트랜스지방산 (g)
-    val MAKER_NAME: String
+    val MAKER_NAME: String, // 제조사
+    var weight: Float    // 얼마나 먹었는지 (g)
 )

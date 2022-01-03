@@ -65,7 +65,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:text="키(cm), 몸무게(kg)"
-                    android:textColor="@color/mediumPurple"
+                    android:textColor="@color/purple_200"
                     android:textSize="20dp"
                     android:fontFamily="@font/g_medium"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -73,17 +73,25 @@
                     app:layout_constraintStart_toEndOf="@id/pieChart"
                     app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/btn_editProfile"
-                    android:layout_width="70dp"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_marginEnd="1dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="edit"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/g_medium"
+                    android:src="@drawable/edit"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/btn_dailyReport"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="1dp"
+                    android:src="@drawable/report"
+                    app:layout_constraintTop_toBottomOf="@id/btn_editProfile"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,20 +126,33 @@
                     android:hint="음식을 검색하세요"
                     android:inputType="text"
                     android:fontFamily="@font/g_medium"
-                    app:layout_constraintEnd_toStartOf="@id/btn_searchFood"
+                    app:layout_constraintEnd_toStartOf="@id/et_inputWeight"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
+                <EditText
+                    android:autofillHints="no"
+                    android:id="@+id/et_inputWeight"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:hint="(g)"
+                    android:inputType="text"
+                    android:fontFamily="@font/g_medium"
+                    app:layout_constraintEnd_toStartOf="@id/btn_searchFood"
+                    app:layout_constraintStart_toEndOf="@id/et_inputFood"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
                     android:id="@+id/btn_searchFood"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="10dp"
-                    android:text="search"
+                    android:src="@drawable/magnifier"
                     android:fontFamily="@font/g_medium"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/et_inputFood"
+                    app:layout_constraintStart_toEndOf="@id/et_inputWeight"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
