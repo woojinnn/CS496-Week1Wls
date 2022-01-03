@@ -15,8 +15,8 @@ import kotlinx.android.synthetic.main.item_gallery.view.*
 
 class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
 
-    var data = arrayListOf<AddImageData>()
-    private var listener : AddImageAdapter.OnItemClickListener? = null
+    var data = mutableListOf<AddImageData>()
+    private var listener : OnItemClickListener? = null
     //lateinit var imageList: ArrayList<AddImageData>
     //var imageList : ArrayList<AddImageData>
     //lateinit var imageList : ArrayList<AddImageData>
@@ -51,13 +51,16 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
         fun onItemClick(v: View, data: AddImageData, pos: Int)
     }
 
+    fun setOnItemClickListener(listener :OnItemClickListener) {
+        this.listener = listener
+    }
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val vimage: ImageView = itemView.addimage
         private val vtag: TextView = itemView.addtag
 
         fun bind(imageItem: AddImageData) {
-            vimage.setImageURI(imageItem.img)
-            vtag.text = imageItem.tag
+            Glide.with(context).load(imageItem.imageURL).thumbnail(0.1f).error(R.drawable.cat1).into(vimage)
+            vtag.text = imageItem.tags
 
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
@@ -65,6 +68,7 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
                     listener?.onItemClick(itemView, imageItem, pos)
                 }
             }
+
         }
     }
 

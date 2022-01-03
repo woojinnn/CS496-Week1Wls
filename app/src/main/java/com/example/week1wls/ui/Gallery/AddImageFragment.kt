@@ -51,11 +51,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentResolverCompat.query
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week1wls.ui.contact.ContactAdapter
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_contact.*
+import kotlinx.android.synthetic.main.item_add_image.view.*
 
 
 class AddImageFragment : Fragment() {
@@ -66,7 +68,7 @@ class AddImageFragment : Fragment() {
     lateinit var input: String
     private lateinit var addImageadapter: AddImageAdapter
     private var layoutManager: RecyclerView.LayoutManager? = null
-    lateinit var List: ArrayList<AddImageData>
+    lateinit var List: MutableList<AddImageData>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -92,10 +94,17 @@ class AddImageFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_gallery_add_image_to_navigation_gallery)
         }
         //set adapter for image List
+        ImageList.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            adapter = AddImageAdapter(context)
+        }
         addImageadapter = AddImageAdapter(requireContext())
-        imageList.adapter = addImageadapter
+        //ImageList.adapter = addImageadapter
 
-        setImage()
+
+
+
+        //setImage()
         /* input 받기 */
         // 이미지 검색
         srhQBtn.setOnClickListener {
@@ -104,22 +113,24 @@ class AddImageFragment : Fragment() {
             val thread = ApiImageInfo(input)
             thread.start()
             thread.join()
-            List = thread.List
+            List = thread.imageList
             Log.d("Images", List.toString())
+            // 출력 완료
             addImageadapter.data = List
             addImageadapter.notifyDataSetChanged()
 
             inputQ.setText("")
         }
 
+        // 사진 터치 (다른 이벤트)
         addImageadapter.setOnItemClickListener(object : AddImageAdapter.OnItemClickListener {
             override fun onItemClick(v: View, imageData: AddImageData, pos: Int) {
-                val newImgData = AddImageData(imgData.img, imgData.tag)
+                val newImgData = AddImageData(imgData.pageURL, imgData.tags, imgData.imageURL, imgData.views, imgData.downloads, imgData.likes)
                 val spEditor = profileCache.edit()
                 val imgDataStr = gson.toJson(newImgData, AddImageData::class.java)
                 spEditor.putString("profileCache", imgDataStr)
                 spEditor.commit()
-                setImage()
+                //setImage()
 
                 addImageadapter.data.clear()
                 addImageadapter.notifyDataSetChanged()
@@ -127,9 +138,9 @@ class AddImageFragment : Fragment() {
 
         })
     }
-
+    /*
     private fun setImage() {
-        getImageInfo()
+        //getImageInfo()
 
         setImageTexts()
     }
@@ -139,11 +150,12 @@ class AddImageFragment : Fragment() {
         val imageStr = profileCache.getString("profileCache", "")
         imgData = gson.fromJson(imageStr, AddImageData::class.java)
     }
-
+*/
     private fun setImageTexts() {
-        addimage.setImageURI(imgData.img)
-        addtag.text = imgData.tag
+        addtag.text = imgData.tags
+        Glide.with(requireContext()).load(imgData.imageURL).into(addimage)
     }
+
 
 
 

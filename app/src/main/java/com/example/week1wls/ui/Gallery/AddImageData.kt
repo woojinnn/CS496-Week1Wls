@@ -5,6 +5,10 @@ import android.widget.ImageView
 
 data class AddImageData (
     //val img : String -> for crwaling
-    val img : Uri,
-    var tag : String
+    val pageURL : String,
+    val tags: String,
+    val imageURL: String,
+    val views: Int,
+    val downloads: Int,
+    val likes: Int
     )
