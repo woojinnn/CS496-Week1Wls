@@ -19,7 +19,6 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.fragment_healthcare_main.*
 
 //import com.github.mikephil.charting.charts.PieChart
@@ -60,10 +59,10 @@ class MainFragment: Fragment() {
         // information setting
         tv_name.text = profile.name
         if(profile.isMale)
-            tv_agesex.text = "(남) " + profile.age + "세"
+            tv_agesex.text = "(남) ${profile.age}세"
         else
-            tv_agesex.text = "(여) " + profile.age + "세"
-        tv_physical.text = profile.height.toString() + " (cm), " + profile.weight.toString() + " (kg)"
+            tv_agesex.text = "(여) ${profile.age}세"
+        tv_physical.text = "${profile.height} (cm), ${profile.weight} (kg)"
 
         // Pie chart
         pieChart.setUsePercentValues(true)
@@ -93,18 +92,21 @@ class MainFragment: Fragment() {
         btn_editProfile.setOnClickListener{
             val editor = profileCache.edit()
             editor.clear()
-            editor.commit()
+            editor.apply()
             findNavController().navigate(R.id.action_navigation_healthcare_main_to_navigation_notifications)
         }
 
-
-//        /* input 받기 */
-//        // search 버튼 눌렸을 때
-//        fdsrhBtn.setOnClickListener {
-//            input = inputFood.text.toString()
-//            inputText.text = null
-//            findFood(input)
-//        }
+        /* input 받기 */
+        // search 버튼 눌렸을 때
+        btn_searchFood.setOnClickListener {
+            input = et_inputFood.text.toString()
+            val thread = ApiFoodInfo(input)
+            thread.start()
+            thread.join()
+            val foods = thread.foodList
+            Log.d("foods", foods.toString())
+            et_inputFood.setText("")
+        }
 
     }
 
