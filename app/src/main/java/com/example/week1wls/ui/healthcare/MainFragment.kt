@@ -19,7 +19,6 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.fragment_healthcare_main.*
 
 //import com.github.mikephil.charting.charts.PieChart
