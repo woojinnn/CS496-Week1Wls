@@ -8,14 +8,14 @@ import java.net.URL
 import java.net.URLEncoder
 
 class ApiFoodInfo(private val keyName: String): Thread() {
-    lateinit var foodList: List<FoodData>
+    lateinit var foodList: MutableList<FoodData>
 
     override fun run() {
         super.run()
         foodList = getData()
     }
 
-    private fun getData(): List<FoodData> {
+    private fun getData(): MutableList<FoodData> {
         // site url
         val base_url = "http://openapi.foodsafetykorea.go.kr/api/6abc28c56a754c01843f/I2790/json/1/100/DESC_KOR="
         val site = base_url + "\"${keyName}\""
