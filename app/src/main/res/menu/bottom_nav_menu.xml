@@ -4,19 +4,19 @@
     <item
         android:id="@+id/navigation_contact"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_contact_24"
+        android:icon="@drawable/ic_contact"
         android:title="@string/title_contact" />
 
     <item
         android:id="@+id/navigation_gallery_input"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_gallery_24"
+        android:icon="@drawable/ic_gallery"
         android:title="@string/title_gallery" />
 
     <item
         android:id="@+id/navigation_health"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_health_24"
+        android:icon="@drawable/ic_health"
         android:title="@string/title_health" />
 
 </menu>

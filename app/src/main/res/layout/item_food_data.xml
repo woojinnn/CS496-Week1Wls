@@ -12,6 +12,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/g_bold"
         android:text="라면"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +30,7 @@
         android:layout_marginBottom="8dp"
         android:text="500kcal"
         android:textSize="24sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/g_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/foodName" />
 

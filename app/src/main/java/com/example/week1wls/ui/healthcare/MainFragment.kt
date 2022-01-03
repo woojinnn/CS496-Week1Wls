@@ -39,6 +39,7 @@ class MainFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         profileCache = requireActivity().getSharedPreferences(
             "profileCache",
             Context.MODE_PRIVATE
