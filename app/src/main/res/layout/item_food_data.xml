@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/foodName"
+        android:id="@+id/tv_rv_foodName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/foodKcal"
+        android:id="@+id/tv_rv_calories"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -30,8 +30,8 @@
         android:layout_marginBottom="8dp"
         android:text="500kcal"
         android:textSize="24sp"
-        android:fontFamily="@font/g_medium"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/foodName" />
+        app:layout_constraintStart_toEndOf="@+id/tv_rv_foodName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
