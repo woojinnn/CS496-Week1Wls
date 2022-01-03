@@ -3,6 +3,7 @@ package com.example.week1wls.ui.Gallery
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,9 +66,11 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
         private val vtag: TextView = itemView.addtag
 
         fun bind(imageItem: AddImageData) {
-//            Glide.with(context).load(imageItem.imageURL).into(vimage)
+           //Glide.with(context).load(imageItem.imageURL).into(vimage)
+            Log.d("test2222", "ffff")
+            vimage.setImageResource(R.drawable.cat1)
             //Glide.with(context).load(imageItem.imageURL).dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL).into(vimage)
-            Picasso.get().load(imageItem.imageURL).into(vimage)
+            //Picasso.get().load(imageItem.imageURL).into(vimage)
             vtag.text = imageItem.tags
 
             val pos = adapterPosition
