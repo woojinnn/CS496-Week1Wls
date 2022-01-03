@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.item_food_data.view.*
 class HealthAdapter(private val context: Context): RecyclerView.Adapter<HealthAdapter.ViewHolder>() {
 
     var data = mutableListOf<FoodData>()
+    private var listener : OnItemClickListener? = null  // for click event
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HealthAdapter.ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_food_data, parent, false)
@@ -26,16 +27,32 @@ class HealthAdapter(private val context: Context): RecyclerView.Adapter<HealthAd
         holder.bind(data[position])
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    interface OnItemClickListener{
+        fun onItemClick(v:View, data: FoodData, pos: Int)
+    }
+
+    fun setOnItemClickListener(listener : OnItemClickListener) {
+        this.listener = listener
+    }
+
+    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val foodName: TextView = itemView.tv_rv_foodName
         private val foodCalories: TextView = itemView.tv_rv_calories
 
-        fun bind(item: FoodData) {
-            foodName.text = item.name
-            if(item.NUTR_CONT1 == null) {
+        fun bind(foodItem: FoodData) {
+            foodName.text = foodItem.name
+            if(foodItem.NUTR_CONT1 == null) {
                 foodCalories.text = "칼로리 데이터 없음"
             } else {
-                foodCalories.text = item.NUTR_CONT1.toString() + "(kcal)"
+                foodCalories.text = foodItem.NUTR_CONT1.toString() + "(kcal)"
+            }
+
+            // click listener
+            val pos = adapterPosition
+            if(pos!= RecyclerView.NO_POSITION) {
+                itemView.setOnClickListener {
+                    listener?.onItemClick(itemView, foodItem, pos)
+                }
             }
         }
     }

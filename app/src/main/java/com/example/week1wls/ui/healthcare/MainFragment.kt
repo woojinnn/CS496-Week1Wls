@@ -76,6 +76,23 @@ class MainFragment: Fragment() {
             et_inputFood.setText("")
         }
 
+        // 음식 리스트 터치됐을 때
+        healthAdapter.setOnItemClickListener(object: HealthAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, foodData: FoodData, pos: Int) {
+                // update profile
+                val newProfile = Profile(profile.name, profile.height, profile.weight, profile.age, profile.isMale, profile.bmr, profile.total + foodData.NUTR_CONT1)
+                val spEditor = profileCache.edit()
+                val profileStr = gson.toJson(newProfile, Profile::class.java)
+                spEditor.putString("profileCache", profileStr)
+                spEditor.commit()
+                setProfile()
+
+                // clear recyclerView contents
+                healthAdapter.data.clear()
+                healthAdapter.notifyDataSetChanged()
+            }
+        })
+
     }
 
     private fun setProfile() {
@@ -106,7 +123,8 @@ class MainFragment: Fragment() {
 
         val pieEntries = ArrayList<PieEntry>()
         pieEntries.add(PieEntry(profile.total.toFloat(),"Current"))
-        pieEntries.add(PieEntry((profile.bmr - profile.total).toFloat(), "Total")) // Remaining
+        val remainingCal = if(profile.bmr > profile.total) (profile.bmr - profile.total).toFloat() else 0.toFloat()
+        pieEntries.add(PieEntry(remainingCal, "Total")) // Remaining
 
         val pieDataset = PieDataSet(pieEntries, "")
         val pieData = PieData(pieDataset)
@@ -117,7 +135,7 @@ class MainFragment: Fragment() {
         pieChart.legend.isEnabled = false
         pieChart.description.isEnabled = false
         pieChart.setDrawEntryLabels(false)
-        pieChart.centerText = "${profile.total} / ${profile.bmr}"
+        pieChart.centerText = "${profile.total.toInt()} / ${profile.bmr.toInt()}"
         pieChart.setCenterTextColor(Color.BLACK)
         pieChart.setCenterTextSize(10f)
         pieChart.animateY(1400, Easing.EaseInOutQuad)

@@ -54,7 +54,7 @@ class ApiFoodInfo(private val keyName: String): Thread() {
                 continue
             }
 
-            val servingWt = JSON_Parse(jObject, "SERVING_SIZE").toDouble()
+            val servingWt = getDouble(JSON_Parse(jObject, "SERVING_SIZE"))
             val nutrCont1 = getDouble(JSON_Parse(jObject, "NUTR_CONT1"))
             val nutrCont2 = getDouble(JSON_Parse(jObject, "NUTR_CONT2"))
             val nutrCont3 = getDouble(JSON_Parse(jObject, "NUTR_CONT3"))
@@ -66,8 +66,11 @@ class ApiFoodInfo(private val keyName: String): Thread() {
             val nutrCont9 = getDouble(JSON_Parse(jObject, "NUTR_CONT9"))
             val makerName = JSON_Parse(jObject, "MAKER_NAME")
 
-            val foodData = FoodData(foodName, servingWt, nutrCont1, nutrCont2, nutrCont3, nutrCont4, nutrCont5, nutrCont6, nutrCont7, nutrCont8, nutrCont9, makerName)
-            foodArr.add(foodData)
+            val nutrList = listOf(nutrCont1, nutrCont2, nutrCont3, nutrCont4, nutrCont5, nutrCont6, nutrCont7, nutrCont8, nutrCont9)
+            if(nutrList.size == nutrList.filterNotNull().size) {
+                val foodData = FoodData(foodName, servingWt!!, nutrCont1!!, nutrCont2!!, nutrCont3!!, nutrCont4!!, nutrCont5!!, nutrCont6!!, nutrCont7!!, nutrCont8!!, nutrCont9!!, makerName)
+                foodArr.add(foodData)
+            }
         }
 
         return foodArr
