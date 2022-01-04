@@ -18,10 +18,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/g_bold"
             android:textAlignment="center"
-            android:text="제목"
+            android:text="밥"
             android:textColor="@color/mediumPurple"
             android:textSize="70sp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="30dp"
             app:layout_constraintStart_toStartOf="@id/et_name"
             app:layout_constraintBottom_toTopOf="@id/et_name"/>
 

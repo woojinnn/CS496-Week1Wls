@@ -14,6 +14,7 @@ import com.example.week1wls.R
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_add_image.*
+import kotlinx.android.synthetic.main.item_add_image.*
 
 
 class AddImageFragment : Fragment() {
