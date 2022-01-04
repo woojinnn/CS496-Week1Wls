@@ -6,11 +6,9 @@ import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.week1wls.R
@@ -24,14 +22,14 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_healthcare_main.*
 
-class MainFragment: Fragment() {
+class MainFragment : Fragment() {
     private lateinit var profileCache: SharedPreferences
     private lateinit var foodHistoryCache: SharedPreferences
     private lateinit var foodHistory: MutableList<FoodData>
     private lateinit var gson: Gson
     private lateinit var profile: Profile
     private lateinit var healthAdapter: HealthAdapter
-    private lateinit var input : String
+    private lateinit var input: String
     private lateinit var foodList: MutableList<FoodData>
 
     override fun onCreateView(
@@ -66,7 +64,7 @@ class MainFragment: Fragment() {
         setProfile()
 
         // Edit profile button
-        btn_editProfile.setOnClickListener{
+        btn_editProfile.setOnClickListener {
             val editor = profileCache.edit()
             editor.clear()
             editor.apply()
@@ -77,8 +75,7 @@ class MainFragment: Fragment() {
             findNavController().navigate(R.id.action_navigation_healthcare_main_to_navigation_notifications)
         }
 
-        /* input 받기 */
-        // search 버튼 눌렸을 때
+        // clicked search button
         btn_searchFood.setOnClickListener {
             input = et_inputFood.text.toString()
 
@@ -92,10 +89,10 @@ class MainFragment: Fragment() {
             et_inputFood.setText("")
         }
 
-        // 음식 리스트 터치됐을 때
-        healthAdapter.setOnItemClickListener(object: HealthAdapter.OnItemClickListener {
+        // clicked food item
+        healthAdapter.setOnItemClickListener(object : HealthAdapter.OnItemClickListener {
             override fun onItemClick(v: View, foodData: FoodData, pos: Int) {
-                val weight = if(et_inputWeight.text.toString() != "") {
+                val weight = if (et_inputWeight.text.toString() != "") {
                     et_inputWeight.text.toString().toFloat()
                 } else {
                     foodData.SERVING_WT.toFloat()
@@ -104,19 +101,19 @@ class MainFragment: Fragment() {
 
                 // update foodHistory
                 foodHistory.forEach {
-                    if(it.name == foodData.name) {
+                    if (it.name == foodData.name) {
                         val prevCnt = it.weight
                         it.weight = prevCnt + weight
                     }
                 }
-                if(foodHistory.find {it.name == foodData.name } == null) {
+                if (foodHistory.find { it.name == foodData.name } == null) {
                     // if the element was not in foodData
                     foodHistory.add(foodData.copy(weight = weight))
                 }
 
                 // update sharedPreference
                 val spEditor = foodHistoryCache.edit()
-                val type = object: TypeToken<MutableList<FoodData>>() {}
+                val type = object : TypeToken<MutableList<FoodData>>() {}
                 val foodHistoryStr = gson.toJson(foodHistory, type.type)
                 spEditor.putString("foodHistoryCache", foodHistoryStr)
                 spEditor.commit()
@@ -148,7 +145,7 @@ class MainFragment: Fragment() {
 
                             // update sharedPreference
                             val spEditor = foodHistoryCache.edit()
-                            val type = object: TypeToken<MutableList<FoodData>>() {}
+                            val type = object : TypeToken<MutableList<FoodData>>() {}
                             val foodHistoryStr = gson.toJson(foodHistory, type.type)
                             spEditor.putString("foodHistoryCache", foodHistoryStr)
                             spEditor.commit()
@@ -180,17 +177,17 @@ class MainFragment: Fragment() {
 
     private fun updateFoodHistory() {
         val foodHistoryStr = foodHistoryCache.getString("foodHistoryCache", "")
-        if(foodHistoryStr == "") {
+        if (foodHistoryStr == "") {
             foodHistory = mutableListOf<FoodData>()
         } else {
-            val type = object: TypeToken<MutableList<FoodData>>() {}
+            val type = object : TypeToken<MutableList<FoodData>>() {}
             foodHistory = gson.fromJson(foodHistoryStr, type.type) as MutableList<FoodData>
         }
     }
 
     private fun setProfileTexts() {
         tv_name.text = profile.name
-        if(profile.isMale)
+        if (profile.isMale)
             tv_agesex.text = "(남) ${profile.age}세"
         else
             tv_agesex.text = "(여) ${profile.age}세"
@@ -203,8 +200,9 @@ class MainFragment: Fragment() {
         pieChart.setUsePercentValues(true)
 
         val pieEntries = ArrayList<PieEntry>()
-        pieEntries.add(PieEntry(totalCalories(),"Current"))
-        val remainingCal = if(profile.bmr > totalCalories()) (profile.bmr - totalCalories()).toFloat() else 0.toFloat()
+        pieEntries.add(PieEntry(totalCalories(), "Current"))
+        val remainingCal =
+            if (profile.bmr > totalCalories()) (profile.bmr - totalCalories()).toFloat() else 0.toFloat()
         pieEntries.add(PieEntry(remainingCal, "Total")) // Remaining
 
         val pieDataset = PieDataSet(pieEntries, "")
@@ -235,7 +233,4 @@ class MainFragment: Fragment() {
         return totalCal
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
 }

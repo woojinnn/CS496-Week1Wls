@@ -26,7 +26,6 @@ class ApiImageInfo(private val keyName: String): Thread() {
         val isr = InputStreamReader(input)
         val br = BufferedReader(isr)
 
-        // Json 문서는 일단 문자열로 데이터를 모두 읽어온 후, Json에 관련된 객체를 만들어서 데이터를 가져옴
         var str: String? = null
         val buf = StringBuffer()
 
@@ -38,7 +37,6 @@ class ApiImageInfo(private val keyName: String): Thread() {
             }
         } while(str != null)
 
-        // 전체가 객체로 묶여있기 때문에 객체형태로 가져옴
         val root = JSONObject(buf.toString())
 
         val items = root.getJSONArray("hits")
@@ -72,9 +70,8 @@ class ApiImageInfo(private val keyName: String): Thread() {
         return imageArr
     }
 
-    // 함수를 통해 데이터를 불러온다.
+    // parse json
     private fun JSON_Parse(obj: JSONObject, data: String): String {
-        // 원하는 정보를 불러와 리턴받고 없는 정보는 캐치하여 "없습니다."로 리턴받는다.
         return try {
             obj.getString(data)
         } catch (e: Exception) {

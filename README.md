@@ -1,9 +1,9 @@
-# 선우야 잠 좀 자자
+# 광아지
 
 
 ## Introduction
 ### Abstraction
-**선우야 잠 좀 자자** is an Android-application that has 3 tabs: Contact, Gallery, 밥. Overall, **선우야 잠 좀 자자** is implemented with navigation and fragments.
+**광아지** is an Android-application that has 3 tabs: Contact, Gallery, 밥. Overall, **광아지** is implemented with navigation and fragments.
 
 ### Development Envrionment
 - **IDE**: Android Studio

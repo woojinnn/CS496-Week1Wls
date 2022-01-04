@@ -2,7 +2,6 @@ package com.example.week1wls.ui.contact
 
 import android.Manifest
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -22,8 +21,9 @@ import com.example.week1wls.R
 import kotlinx.android.synthetic.main.fragment_contact.*
 
 class ContactFragment : Fragment() {
-    private val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
-    private lateinit var adapter:ContactAdapter
+    private val permissions =
+        arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
+    private lateinit var adapter: ContactAdapter
     private var list = mutableListOf<ContactItem>()
     var searchText = ""
     private var sortText = "asc"
@@ -40,10 +40,6 @@ class ContactFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         checkAndStart()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     private fun startProcess() {
@@ -74,7 +70,7 @@ class ContactFragment : Fragment() {
     }
 
     private fun setSearchListener() {
-        editSearch.addTextChangedListener(object: TextWatcher {
+        editSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -86,7 +82,7 @@ class ContactFragment : Fragment() {
 
     private fun setRadioListener() {
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId) {
+            when (checkedId) {
                 R.id.radioAsc -> sortText = "asc"
                 R.id.radioDsc -> sortText = "desc"
             }
@@ -94,14 +90,14 @@ class ContactFragment : Fragment() {
         }
     }
 
-    fun changeList() {
+    private fun changeList() {
         val newList = getPhoneNumbers(sortText, searchText)
         this.list.clear()
         this.list.addAll(newList)
         this.adapter.notifyDataSetChanged()
     }
 
-    private fun getPhoneNumbers(sort:String, searchName:String?) : List<ContactItem> {
+    private fun getPhoneNumbers(sort: String, searchName: String?): List<ContactItem> {
         // return value
         val list = mutableListOf<ContactItem>()
 
@@ -115,10 +111,10 @@ class ContactFragment : Fragment() {
             ContactsContract.CommonDataKinds.Phone.NUMBER
         )
         // 2.2 조건 정의
-        var where:String? = null
-        var values:Array<String>? = null
+        var where: String? = null
+        var values: Array<String>? = null
         // searchName에 값이 있을 때만 검색을 사용한다
-        if(searchName?.isNotEmpty() ?: false) {
+        if (searchName?.isNotEmpty() == true) {
             where = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ?"
             values = arrayOf("%$searchName%")
         }
@@ -126,10 +122,16 @@ class ContactFragment : Fragment() {
         val optionSort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " $sort"
 
         // 3. 테이블에서 주소록 데이터 쿼리
-        val cursor = requireActivity().contentResolver.query(phoneUri, projections, where, values, optionSort)
+        val cursor = requireActivity().contentResolver.query(
+            phoneUri,
+            projections,
+            where,
+            values,
+            optionSort
+        )
 
         // 4. 반복문으로 아이디와 이름을 가져오면서 전화번호 조회 쿼리를 한번 더 돌린다.
-        while(cursor?.moveToNext()?:false) {
+        while (cursor?.moveToNext() == true) {
             val id = cursor?.getString(0)   // CONTACT_ID
             val name = cursor?.getString(1) // DISPLAY_NAME
             var number = cursor?.getString(2)   // NUMBER
@@ -146,24 +148,27 @@ class ContactFragment : Fragment() {
 
     // 권한처리 코드
     private fun checkAndStart() {
-        if( isLower23() || isPermitted()) {
+        if (isLower23() || isPermitted()) {
             startProcess()
         } else {
             ActivityCompat.requestPermissions(requireActivity(), permissions, 99)
         }
     }
-    private fun isLower23() : Boolean{
+
+    private fun isLower23(): Boolean {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
-    fun isPermitted():Boolean {
-        for(perm in permissions) {
-            if(checkSelfPermission(requireContext(), perm) != PackageManager.PERMISSION_GRANTED) {
+    fun isPermitted(): Boolean {
+        for (perm in permissions) {
+            if (checkSelfPermission(requireContext(), perm) != PackageManager.PERMISSION_GRANTED) {
                 return false
             }
         }
         return true
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -171,17 +176,18 @@ class ContactFragment : Fragment() {
     ) {
         // May be deleted
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == 99) {
+        if (requestCode == 99) {
             var check = true
-            for(grant in grantResults) {
-                if(grant != PackageManager.PERMISSION_GRANTED) {
+            for (grant in grantResults) {
+                if (grant != PackageManager.PERMISSION_GRANTED) {
                     check = false
                     break
                 }
             }
-            if(check) startProcess()
+            if (check) startProcess()
             else {
-                Toast.makeText(requireContext(), "권한 승인을 하셔야지만 앱을 사용할 수 있습니다.", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "권한 승인을 하셔야지만 앱을 사용할 수 있습니다.", Toast.LENGTH_LONG)
+                    .show()
                 requireActivity().finish()
             }
         }

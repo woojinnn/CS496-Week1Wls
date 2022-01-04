@@ -1,7 +1,5 @@
 package com.example.week1wls.ui.Gallery
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +12,6 @@ import com.example.week1wls.R
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_add_image.*
-import kotlinx.android.synthetic.main.item_add_image.*
 
 
 class AddImageFragment : Fragment() {
@@ -23,7 +20,6 @@ class AddImageFragment : Fragment() {
     private lateinit var imgData: AddImageData
     lateinit var input: String
     private lateinit var addImageadapter: AddImageAdapter
-    //private var layoutManager: RecyclerView.LayoutManager? = null
     lateinit var List: MutableList<AddImageData>
 
     override fun onCreateView(
@@ -34,8 +30,7 @@ class AddImageFragment : Fragment() {
 
         gson = GsonBuilder().create()
 
-        val view = inflater.inflate(R.layout.fragment_add_image, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_add_image, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +41,6 @@ class AddImageFragment : Fragment() {
         addImageadapter = AddImageAdapter(requireContext())
         ImageList.adapter = addImageadapter
 
-        //setImage()
         /* input 받기 */
         // 이미지 검색
         srhQBtn.setOnClickListener {
@@ -64,21 +58,21 @@ class AddImageFragment : Fragment() {
             inputQ.setText("")
         }
 
-        addImageadapter.setOnItemClickListener(object: AddImageAdapter.OnItemClickListener {
+        addImageadapter.setOnItemClickListener(object : AddImageAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: AddImageData, pos: Int) {
                 val bundle = Bundle()
                 bundle.putString("url", data.pageURL)
                 val webViewFrag = WebViewFragment()
                 webViewFrag.arguments = bundle
 
-                val action = AddImageFragmentDirections.actionNavigationGalleryAddImageToNavigationGalleryWebview(data.pageURL)
+                val action =
+                    AddImageFragmentDirections.actionNavigationGalleryAddImageToNavigationGalleryWebview(
+                        data.pageURL
+                    )
                 findNavController().navigate(action)
             }
         })
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
 }

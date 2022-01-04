@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.week1wls.R
 import kotlinx.android.synthetic.main.fragment_web_view.*
 
-class WebViewFragment: Fragment() {
+class WebViewFragment : Fragment() {
     lateinit var url: String
 
     override fun onCreate(savedInstanceState: Bundle?) {

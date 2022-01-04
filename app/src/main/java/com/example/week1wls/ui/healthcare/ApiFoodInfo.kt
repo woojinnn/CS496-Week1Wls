@@ -1,13 +1,11 @@
 package com.example.week1wls.ui.healthcare
 
-import android.util.Log
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
-import java.net.URLEncoder
 
-class ApiFoodInfo(private val keyName: String): Thread() {
+class ApiFoodInfo(private val keyName: String) : Thread() {
     lateinit var foodList: MutableList<FoodData>
 
     override fun run() {
@@ -17,32 +15,30 @@ class ApiFoodInfo(private val keyName: String): Thread() {
 
     private fun getData(): MutableList<FoodData> {
         // site url
-        val base_url = "http://openapi.foodsafetykorea.go.kr/api/6abc28c56a754c01843f/I2790/json/1/100/DESC_KOR="
+        val base_url =
+            "http://openapi.foodsafetykorea.go.kr/api/6abc28c56a754c01843f/I2790/json/1/100/DESC_KOR="
         val site = base_url + "\"${keyName}\""
 
         val url = URL(site)
         val conn = url.openConnection()
         val input = conn.getInputStream()
         val isr = InputStreamReader(input)
-        // br: 라인 단위로 데이터를 읽어오기 위해서 만듦
         val br = BufferedReader(isr)
 
-        // Json 문서는 일단 문자열로 데이터를 모두 읽어온 후, Json에 관련된 객체를 만들어서 데이터를 가져옴
         var str: String? = null
         val buf = StringBuffer()
 
-        do{
+        do {
             str = br.readLine()
 
-            if(str!=null){
+            if (str != null) {
                 buf.append(str)
             }
-        }while (str!=null)
+        } while (str != null)
 
-        // 전체가 객체로 묶여있기 때문에 객체형태로 가져옴
         val root = JSONObject(buf.toString()).getJSONObject("I2790")
 
-        if(JSON_Parse(root, "total_count") == "0") {
+        if (JSON_Parse(root, "total_count") == "0") {
             return mutableListOf<FoodData>()
         }
 
@@ -71,9 +67,33 @@ class ApiFoodInfo(private val keyName: String): Thread() {
             val nutrCont9 = getDouble(JSON_Parse(jObject, "NUTR_CONT9"))
             val makerName = JSON_Parse(jObject, "MAKER_NAME")
 
-            val nutrList = listOf(nutrCont1, nutrCont2, nutrCont3, nutrCont4, nutrCont5, nutrCont6, nutrCont7, nutrCont8, nutrCont9)
-            if(nutrList.size == nutrList.filterNotNull().size) {
-                val foodData = FoodData(foodName, servingWt!!, nutrCont1!!, nutrCont2!!, nutrCont3!!, nutrCont4!!, nutrCont5!!, nutrCont6!!, nutrCont7!!, nutrCont8!!, nutrCont9!!, makerName, 0.toFloat())
+            val nutrList = listOf(
+                nutrCont1,
+                nutrCont2,
+                nutrCont3,
+                nutrCont4,
+                nutrCont5,
+                nutrCont6,
+                nutrCont7,
+                nutrCont8,
+                nutrCont9
+            )
+            if (nutrList.size == nutrList.filterNotNull().size) {
+                val foodData = FoodData(
+                    foodName,
+                    servingWt!!,
+                    nutrCont1!!,
+                    nutrCont2!!,
+                    nutrCont3!!,
+                    nutrCont4!!,
+                    nutrCont5!!,
+                    nutrCont6!!,
+                    nutrCont7!!,
+                    nutrCont8!!,
+                    nutrCont9!!,
+                    makerName,
+                    0.toFloat()
+                )
                 foodArr.add(foodData)
             }
         }
@@ -81,17 +101,16 @@ class ApiFoodInfo(private val keyName: String): Thread() {
         return foodArr
     }
 
-    fun getDouble(num: String): Double? {
-        return try{
+    private fun getDouble(num: String): Double? {
+        return try {
             num.toDouble()
         } catch (e: NumberFormatException) {
             null
         }
     }
 
-    // 함수를 통해 데이터를 불러온다.
+    // get data
     private fun JSON_Parse(obj: JSONObject, data: String): String {
-        // 원하는 정보를 불러와 리턴받고 없는 정보는 캐치하여 "없습니다."로 리턴받는다.
         return try {
             obj.getString(data)
         } catch (e: Exception) {

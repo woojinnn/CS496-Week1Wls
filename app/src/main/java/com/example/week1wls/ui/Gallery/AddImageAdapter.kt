@@ -11,10 +11,11 @@ import com.bumptech.glide.Glide
 import com.example.week1wls.R
 import kotlinx.android.synthetic.main.item_add_image.view.*
 
-class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
+class AddImageAdapter(private val context: Context) :
+    RecyclerView.Adapter<AddImageAdapter.ViewHolder>() {
 
     var data = mutableListOf<AddImageData>()
-    private var listener : OnItemClickListener? = null
+    private var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddImageAdapter.ViewHolder {
         var view = LayoutInflater.from(context).inflate(R.layout.item_add_image, parent, false)
@@ -22,11 +23,6 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        /*
-        val item = imageList[i]
-        viewHolder.setItem(items
-        */
-        //viewHolder.addimage.setImageResource(imageList[i].img)
         holder.bind(data[position])
     }
 
@@ -34,13 +30,13 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
         return data.size
     }
 
-    interface OnItemClickListener{
+    interface OnItemClickListener {
         fun onItemClick(v: View, tmpdata: AddImageData, pos: Int) {
         }
 
     }
 
-    fun setOnItemClickListener(listener :OnItemClickListener) {
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
@@ -51,13 +47,12 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
         private val vview: TextView = itemView.addViews
 
         fun bind(imageItem: AddImageData) {
-           Glide.with(context).load(imageItem.imageURL).into(vimage)
+            Glide.with(context).load(imageItem.imageURL).into(vimage)
             val splitted = imageItem.tags.split(",")
             var tagsStr = ""
             for (elem in splitted) {
-                    tagsStr += " #${elem.replace(" ", "")} "
+                tagsStr += " #${elem.replace(" ", "")} "
             }
-//            vtag.text = imageItem.tags
             vtag.text = tagsStr
             vlike.text = imageItem.likes.toString()
             vview.text = imageItem.views.toString()
@@ -70,9 +65,4 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
             }
         }
     }
-
-    fun getItem(position: Int): Any {
-        return data[position]
-    }
-
 }

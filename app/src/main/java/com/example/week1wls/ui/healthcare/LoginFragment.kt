@@ -7,12 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.week1wls.R
 import com.google.gson.Gson
@@ -37,18 +33,19 @@ class LoginFragment : Fragment() {
         gson = GsonBuilder().create()
 
         val savedProfile = profileCache.getString("profileCache", "")
-        if(!savedProfile.equals("")) {
+        if (!savedProfile.equals("")) {
             return findNavController().navigate(R.id.navigation_healthcare_main)
         }
 
         Log.d("loginfragment", "onViewCreated1")
 
-        btn_Done.setOnClickListener{
+        btn_Done.setOnClickListener {
             // Check empty field
-            if(et_name.text.toString() == "" ||
+            if (et_name.text.toString() == "" ||
                 et_height.text.toString() == "" ||
                 et_weight.text.toString() == "" ||
-                et_age.text.toString() == "") {
+                et_age.text.toString() == ""
+            ) {
                 Toast.makeText(requireContext(), "Fill every blanks", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -80,7 +77,4 @@ class LoginFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
 }
