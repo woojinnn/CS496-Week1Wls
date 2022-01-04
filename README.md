@@ -80,6 +80,21 @@ Tab that user can search pixabay images and informations.
   - This image lists will be visualized by RecyclerView with `AddImageAdapter` class.
   - For code that I use for API communication, please refer `Gallery/ApiImageInfo.kt`
   - For code used for RecyclerView, please refer `Gallery/AddImageAdapter.kt`, `res/layout/item_add_image`.
+* Navigating to original website 
+  - Core function 
+    ```kotlin
+    addImageadapter.setOnItemClickListener(object: AddImageAdapter.OnItemClickListener {
+        override fun onItemClick(v: View, data: AddImageData, pos: Int) {
+            val bundle = Bundle()
+            bundle.putString("url", data.pageURL)
+            val webViewFrag = WebViewFragment()
+            webViewFrag.arguments = bundle
+
+            val action = AddImageFragmentDirections.actionNavigationGalleryAddImageToNavigationGalleryWebview(data.pageURL)
+            findNavController().navigate(action)
+        }
+    })
+    ```
   - When you click button, fragment `WebViewFragment` will be called with url argument(passed as bundle).
 * Misc
   - The user can search images by pressing button
@@ -87,8 +102,8 @@ Tab that user can search pixabay images and informations.
 * Demo
 
 <p float="left">
-<img src="" width="400" height="800">
-<img src="" width="400" height="800">
+<img src="./gifs/gallery1" width="400" height="800">
+<img src="./gifs/gallery2" width="400" height="800">
 </p>
 
 ### **Tab 3. 밥**    

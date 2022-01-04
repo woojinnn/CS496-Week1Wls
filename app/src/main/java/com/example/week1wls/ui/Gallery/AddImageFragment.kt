@@ -76,13 +76,6 @@ class AddImageFragment : Fragment() {
             }
         })
 
-
-        fun goToSite(view: View, i: Int){
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(addImageadapter.data[i].pageURL))
-            startActivity(intent)
-        }
-
-
     }
 
     override fun onDestroyView() {
