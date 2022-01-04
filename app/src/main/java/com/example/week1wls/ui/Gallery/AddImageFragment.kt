@@ -106,11 +106,6 @@ class AddImageFragment : Fragment() {
             inputQ.setText("")
         }
 
-        fun goToSite(view: View, i: Int){
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(addImageadapter.data[i].pageURL))
-            startActivity(intent)
-        }
-
         // 사진 터치 (다른 이벤트)
         /*
         addImageadapter.setOnItemClickListener(object : AddImageAdapter.OnItemClickListener {

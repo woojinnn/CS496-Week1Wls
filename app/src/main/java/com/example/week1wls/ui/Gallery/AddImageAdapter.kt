@@ -68,6 +68,8 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val vimage: ImageView = itemView.addimage
         private val vtag: TextView = itemView.addtag
+        private val vlike: TextView = itemView.addLikes
+        private val vview: TextView = itemView.addViews
 
         fun bind(imageItem: AddImageData) {
            Glide.with(context).load(imageItem.imageURL).into(vimage)
@@ -76,6 +78,8 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
             //Glide.with(context).load(imageItem.imageURL).dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL).into(vimage)
             //Picasso.get().load(imageItem.imageURL).into(vimage)
             vtag.text = imageItem.tags
+            vlike.text = imageItem.likes.toString()
+            vview.text = imageItem.views.toString()
 
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {

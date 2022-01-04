@@ -20,17 +20,15 @@
             android:scaleType="fitXY"
             android:src="@drawable/cat2" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/addLikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:drawableStart="@drawable/custom_gallery_like"
                 android:drawableTint="@color/red"
                 android:fontFamily="@font/g_medium"
@@ -38,15 +36,15 @@
                 android:textAlignment="center"
                 android:textColor="@color/mediumPurple"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/addtag"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/addViews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:drawableStart="@drawable/custom_gallery_view"
                 android:drawableTint="@color/red"
@@ -55,22 +53,25 @@
                 android:textAlignment="center"
                 android:textColor="@color/mediumPurple"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/addtag"
-                app:layout_constraintLeft_toRightOf="@id/addLikes" />
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintLeft_toRightOf="@id/addLikes"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/btn_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/white"
                 android:src="@drawable/custom_gallery_link"
-                app:layout_constraintRight_toRightOf="@id/addimage"
-                app:layout_constraintTop_toBottomOf="parent" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/addtag"
