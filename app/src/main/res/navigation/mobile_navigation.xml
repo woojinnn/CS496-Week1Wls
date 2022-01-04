@@ -16,6 +16,9 @@
         android:name="com.example.week1wls.ui.Gallery.AddImageFragment"
         android:label="@string/addImage"
         tools:layout="@layout/fragment_add_image" >
+        <action
+            android:id="@+id/action_navigation_gallery_add_image_to_navigation_gallery_webview"
+            app:destination="@id/navigation_gallery_webview" />
     </fragment>
 
     <fragment
@@ -37,6 +40,15 @@
         <action
             android:id="@+id/action_navigation_healthcare_main_to_navigation_notifications"
             app:destination="@id/navigation_health" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_gallery_webview"
+        android:name="com.example.week1wls.ui.Gallery.WebViewFragment"
+        tools:layout="@layout/fragment_web_view" >
+        <argument android:name="url"
+            app:argType="string" />
+
     </fragment>
 
 </navigation>

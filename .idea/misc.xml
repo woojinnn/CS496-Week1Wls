@@ -6,12 +6,17 @@
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/drawable/addperson.xml" value="0.24375" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/drawable/base_profile.xml" value="0.234375" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/alert_get_amount.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_contact.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_dashboard.xml" value="0.371875" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_gallery_webview.xml" value="0.2609375" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_healthcare_login.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_healthcare_main.xml" value="0.2" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_notifications.xml" value="0.21822916666666667" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/fragment_web_view.xml" value="0.28894927536231885" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/item_add_image.xml" value="0.2609375" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/item_contact.xml" value="0.22760416666666666" />
+        <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/item_food_data.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/item_group.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/layout/phone_layout.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/woojin/Desktop/dev/CS496/CS496-Week1Wls/app/src/main/res/menu/bottom_nav_menu.xml" value="0.21822916666666667" />
@@ -40,7 +45,7 @@
         <entry key="app/src/main/res/font/font.xml" value="0.2722222222222222" />
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23233695652173914" />
-        <entry key="app/src/main/res/layout/fragment_add_image.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_add_image.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_healthcare_login.xml" value="0.29528985507246375" />
@@ -49,6 +54,7 @@
         <entry key="app/src/main/res/layout/fragment_input.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/item_add_image.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_add_image.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/item_contact.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout/item_food_data.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout/item_gallery.xml" value="0.1" />

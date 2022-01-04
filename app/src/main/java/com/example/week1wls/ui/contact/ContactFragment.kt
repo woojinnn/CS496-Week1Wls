@@ -101,13 +101,11 @@ class ContactFragment : Fragment() {
         this.adapter.notifyDataSetChanged()
     }
 
-    fun getPhoneNumbers(sort:String, searchName:String?) : List<ContactItem> {
+    private fun getPhoneNumbers(sort:String, searchName:String?) : List<ContactItem> {
         // return value
         val list = mutableListOf<ContactItem>()
 
-        // 1.1. Contact Uri
-        val addressUri = ContactsContract.Contacts.CONTENT_URI
-        // 1.2. Phone Number Uri
+        // 1. Phone Number Uri
         val phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
 
         // 2.1 전화번호에서 가져올 컬럼 정의
