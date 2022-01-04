@@ -12,4 +12,6 @@
     <color name="blue">#3F51B5</color>
     <color name="mediumPurple">#9370db</color>
     <color name="plum">#F5C3F5</color>
+    <color name="red">#F44336</color>
+
 </resources>

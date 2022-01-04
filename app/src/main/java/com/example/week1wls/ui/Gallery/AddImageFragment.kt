@@ -84,7 +84,7 @@ class AddImageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //set adapter for image List\
 
-        ImageList.layoutManager = GridLayoutManager(requireContext(), 2)
+        ImageList.layoutManager = GridLayoutManager(requireContext(), 1)
         addImageadapter = AddImageAdapter(requireContext())
         ImageList.adapter = addImageadapter
 

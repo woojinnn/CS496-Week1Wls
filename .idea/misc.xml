@@ -20,6 +20,9 @@
         <entry key="app/src/main/res/drawable/custom_contact_add.xml" value="0.3707692307692308" />
         <entry key="app/src/main/res/drawable/custom_contact_message.xml" value="0.3707692307692308" />
         <entry key="app/src/main/res/drawable/custom_contact_phone.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable/custom_gallery_like.xml" value="0.3765625" />
+        <entry key="app/src/main/res/drawable/custom_gallery_link.xml" value="0.3765625" />
+        <entry key="app/src/main/res/drawable/custom_gallery_view.xml" value="0.3765625" />
         <entry key="app/src/main/res/drawable/custom_health_age.xml" value="0.2760416666666667" />
         <entry key="app/src/main/res/drawable/custom_health_height.xml" value="0.2760416666666667" />
         <entry key="app/src/main/res/drawable/custom_health_search.xml" value="0.3765625" />
@@ -33,6 +36,7 @@
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.21770833333333334" />
         <entry key="app/src/main/res/drawable/login_border.xml" value="0.2760416666666667" />
         <entry key="app/src/main/res/drawable/message.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/drawable/report.xml" value="0.3765625" />
         <entry key="app/src/main/res/font/font.xml" value="0.2722222222222222" />
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23233695652173914" />
