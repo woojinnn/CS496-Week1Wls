@@ -52,7 +52,13 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
 
         fun bind(imageItem: AddImageData) {
            Glide.with(context).load(imageItem.imageURL).into(vimage)
-            vtag.text = imageItem.tags
+            val splitted = imageItem.tags.split(",")
+            var tagsStr = ""
+            for (elem in splitted) {
+                    tagsStr += " #${elem.replace(" ", "")} "
+            }
+//            vtag.text = imageItem.tags
+            vtag.text = tagsStr
             vlike.text = imageItem.likes.toString()
             vview.text = imageItem.views.toString()
 

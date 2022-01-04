@@ -18,6 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="fitXY"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
             android:src="@drawable/cat2" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,9 +39,10 @@
                 android:text="좋아요"
                 android:textAlignment="center"
                 android:textColor="@color/mediumPurple"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -45,16 +50,16 @@
                 android:id="@+id/addViews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
                 android:drawableStart="@drawable/custom_gallery_view"
                 android:drawableTint="@color/red"
                 android:fontFamily="@font/g_medium"
                 android:text="100"
                 android:textAlignment="center"
                 android:textColor="@color/mediumPurple"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintLeft_toRightOf="@id/addLikes"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,10 +67,10 @@
                 android:id="@+id/btn_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:src="@drawable/custom_gallery_link"
                 app:layout_constraintRight_toRightOf="parent"
@@ -78,32 +83,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/g_bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:scaleType="fitXY"
             android:text="#고양이"
-            android:textSize="40dp" />
-
-        <!--
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/title"
-            android:textColor="@android:color/black"
-            android:textSize="21dp"
-            android:text="Title"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="10dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/desc"
-
-            android:text="Desc"
-            android:textSize="18dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"/>
-        -->
+            android:textSize="25sp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
