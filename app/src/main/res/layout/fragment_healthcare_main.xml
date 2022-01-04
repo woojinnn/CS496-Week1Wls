@@ -80,6 +80,7 @@
                     android:layout_marginEnd="1dp"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/edit"
+                    android:background="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,6 +91,7 @@
                     android:layout_marginEnd="1dp"
                     android:layout_marginTop="1dp"
                     android:src="@drawable/report"
+                    android:background="@color/white"
                     app:layout_constraintTop_toBottomOf="@id/btn_editProfile"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -144,12 +146,14 @@
 
                 <ImageButton
                     android:id="@+id/btn_searchFood"
-                    android:layout_width="48dp"
-                    android:layout_height="65dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/g_medium"
-                    android:src="@drawable/magnifier"
+                    android:src="@drawable/custom_health_search"
+                    android:background="@color/mediumPurple"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/et_inputWeight"
                     app:layout_constraintTop_toTopOf="parent" />

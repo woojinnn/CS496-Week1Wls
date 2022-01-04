@@ -57,9 +57,7 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
     }
 
     interface OnItemClickListener{
-        fun onItemClick(v: View, tmpdata: AddImageData, pos: Int) {
-            data[pos]
-        }
+        fun onItemClick(v: View, tmpdata: AddImageData, pos: Int)
 
     }
 
