@@ -101,7 +101,7 @@ Tab that user can search pixabay images and informations.
   - The user can navigate to original image website by pressing image
 * Demo
 
-<p float="left">
+<p>
 <img src="./gifs/gallery1" width="400" height="800">
 <img src="./gifs/gallery2" width="400" height="800">
 </p>
