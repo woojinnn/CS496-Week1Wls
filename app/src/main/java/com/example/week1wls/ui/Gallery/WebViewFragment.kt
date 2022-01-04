@@ -1,12 +1,10 @@
 package com.example.week1wls.ui.Gallery
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import com.example.week1wls.R
 import kotlinx.android.synthetic.main.fragment_web_view.*

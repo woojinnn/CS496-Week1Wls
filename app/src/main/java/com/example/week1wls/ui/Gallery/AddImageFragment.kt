@@ -1,62 +1,19 @@
 package com.example.week1wls.ui.Gallery
 
-import android.Manifest
-import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.week1wls.R
-import com.example.week1wls.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.fragment_add_image.*
-import kotlinx.android.synthetic.main.item_add_image.*
-import org.jsoup.Jsoup
-import java.lang.Exception
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import androidx.core.app.ActivityCompat.startActivityForResult
-
-import android.content.Intent
-import android.app.Activity
-import android.content.ContentResolver
-import android.content.Context
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
-import android.os.CancellationSignal
-import android.provider.CalendarContract.Attendees.query
-import android.provider.ContactsContract
-import android.provider.MediaStore
-import android.provider.MediaStore.Video.query
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.AdapterView
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.ActivityResultCallback
-
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentResolverCompat.query
-import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.week1wls.ui.contact.ContactAdapter
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.fragment_contact.*
-import kotlinx.android.synthetic.main.item_add_image.view.*
+import kotlinx.android.synthetic.main.fragment_add_image.*
 
 
 class AddImageFragment : Fragment() {

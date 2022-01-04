@@ -1,24 +1,14 @@
 package com.example.week1wls.ui.Gallery
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.SimpleTarget
 import com.example.week1wls.R
-import com.example.week1wls.ui.healthcare.HealthAdapter
 import kotlinx.android.synthetic.main.item_add_image.view.*
 
 class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
@@ -46,7 +36,6 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
 
     interface OnItemClickListener{
         fun onItemClick(v: View, tmpdata: AddImageData, pos: Int) {
-            data[pos]
         }
 
     }
