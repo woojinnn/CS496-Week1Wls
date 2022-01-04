@@ -19,25 +19,13 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.SimpleTarget
 import com.example.week1wls.R
 import com.example.week1wls.ui.healthcare.HealthAdapter
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_add_image.view.*
 
 class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddImageAdapter.ViewHolder> () {
 
     var data = mutableListOf<AddImageData>()
     private var listener : OnItemClickListener? = null
-    //lateinit var imageList: ArrayList<AddImageData>
-    //var imageList : ArrayList<AddImageData>
-    //lateinit var imageList : ArrayList<AddImageData>
-    // for UI test
-    /*
-    var imageList: ArrayList<AddImageData> = arrayListOf(
-        AddImageData(R.drawable.cat1),
-        AddImageData(R.drawable.cat2),
-        AddImageData(R.drawable.cat3),
-        AddImageData(R.drawable.cat4)
-    )
-    */
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddImageAdapter.ViewHolder {
         var view = LayoutInflater.from(context).inflate(R.layout.item_add_image, parent, false)
         return ViewHolder(view)
@@ -73,10 +61,6 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
 
         fun bind(imageItem: AddImageData) {
            Glide.with(context).load(imageItem.imageURL).into(vimage)
-            // for test
-            //vimage.setImageResource(R.drawable.cat1)
-            //Glide.with(context).load(imageItem.imageURL).dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL).into(vimage)
-            //Picasso.get().load(imageItem.imageURL).into(vimage)
             vtag.text = imageItem.tags
 
             val pos = adapterPosition
