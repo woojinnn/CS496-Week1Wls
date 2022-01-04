@@ -18,15 +18,17 @@
             android:layout_height="150dp"
             android:id="@+id/addimage"
             android:scaleType="fitXY"
-            android:onClick="chooseImage"
-            android:src="@drawable/cat2"/>
+            android:src="@drawable/cat2"
+            app:onclick="goToSite"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:id="@+id/addtag"
             android:text = "#고양이"
+            android:fontFamily="@font/g_bold"
             android:scaleType="fitXY" />
+
         <!--
         <TextView
             android:layout_width="match_parent"

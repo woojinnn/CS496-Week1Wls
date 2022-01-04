@@ -1,6 +1,9 @@
 package com.example.week1wls
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,6 +12,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.week1wls.databinding.ActivityMainBinding
 import android.view.Window
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
+import com.example.week1wls.ui.Gallery.AddImageAdapter
+import com.example.week1wls.ui.Gallery.AddImageData
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -38,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
     }
+
     /*
     // addImageFragment 에서 image 선택 시 발생 이벤트
     fun chooseImage(view: View){

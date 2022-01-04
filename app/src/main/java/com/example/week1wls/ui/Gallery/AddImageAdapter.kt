@@ -66,7 +66,7 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
 
         fun bind(imageItem: AddImageData) {
            Glide.with(context).load(imageItem.imageURL).into(vimage)
-            //Log.d("test2222", "ffff")
+            // for test
             //vimage.setImageResource(R.drawable.cat1)
             //Glide.with(context).load(imageItem.imageURL).dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL).into(vimage)
             //Picasso.get().load(imageItem.imageURL).into(vimage)

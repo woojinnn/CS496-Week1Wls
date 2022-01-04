@@ -82,14 +82,7 @@ class AddImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //set adapter for image List\
-        /*
-        ImageList.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = AddImageAdapter(requireContext())
-            Log.d("test", "tttt")
-        }
 
-         */
         ImageList.layoutManager = GridLayoutManager(requireContext(), 2)
         addImageadapter = AddImageAdapter(requireContext())
         ImageList.adapter = addImageadapter
@@ -110,6 +103,12 @@ class AddImageFragment : Fragment() {
             addImageadapter.notifyDataSetChanged()
 
             inputQ.setText("")
+        }
+
+
+        fun goToSite(view: View, i: Int){
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(addImageadapter.data[i].pageURL))
+            startActivity(intent)
         }
 
         // 사진 터치 (다른 이벤트)
@@ -147,13 +146,7 @@ class AddImageFragment : Fragment() {
         Glide.with(requireContext()).load(imgData.imageURL).into(addimage)
     }
     */
-
-
-
-
-
-
-        // start 버튼 눌렸을 때
+     // start 버튼 눌렸을 때
         //srtBtn.setOnClickListener {
         //doTask("https://pixabay.com/images/search/cat/")
 
