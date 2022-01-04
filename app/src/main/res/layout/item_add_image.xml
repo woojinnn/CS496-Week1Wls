@@ -18,7 +18,8 @@
             android:layout_height="150dp"
             android:id="@+id/addimage"
             android:scaleType="fitXY"
-            android:src="@drawable/cat2" />
+            android:src="@drawable/cat2"
+            android:onClick="goToSite"/>
 
         <TextView
             android:layout_width="match_parent"

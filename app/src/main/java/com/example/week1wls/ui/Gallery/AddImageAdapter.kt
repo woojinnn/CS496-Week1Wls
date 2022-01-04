@@ -1,14 +1,17 @@
 package com.example.week1wls.ui.Gallery
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -54,12 +57,16 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
     }
 
     interface OnItemClickListener{
-        fun onItemClick(v: View, data: AddImageData, pos: Int)
+        fun onItemClick(v: View, tmpdata: AddImageData, pos: Int) {
+            data[pos]
+        }
+
     }
 
     fun setOnItemClickListener(listener :OnItemClickListener) {
         this.listener = listener
     }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val vimage: ImageView = itemView.addimage
         private val vtag: TextView = itemView.addtag
@@ -78,9 +85,11 @@ class AddImageAdapter(private val context: Context) : RecyclerView.Adapter<AddIm
                     listener?.onItemClick(itemView, imageItem, pos)
                 }
             }
-
         }
     }
 
+    fun getItem(position: Int): Any {
+        return data[position]
+    }
 
 }

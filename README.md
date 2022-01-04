@@ -31,20 +31,23 @@ Tab that retrieves phone's contact list, and the user can search, add contact, c
 [데모영상]  
 <img src="" width="400" height="800">
 
-
+  
 ### **Tab 2. Custom Gallery**
-Phone address page with save, delete, and bookmark features.    
-* Store names and contact information using SQLite database
-* List contact information using RecyclerView
-* Implemented Add, Wish, and Delete buttons
-* Press the phone icon to switch to dial the number
-* Implemented swipe refresh function
+Tab that user can search pixabay images and informations.
+* Searching images and informations
+  - Used [Pixabay Developer API](https://pixabay.com/ko/service/about/api/) that 'Pixabay' provides. You can get `image URL`, `relative tags`, `image information` (including views, downloads, likes, etc...). This information will be wrapped as `AddImageData` data class.
+  - This image lists will be visualized by RecyclerView with `AddImageAdapter` class.
+  - For code that I use for API communication, please refer `Gallery/ApiImageInfo.kt`
+  - For code used for RecyclerView, please refer `Gallery/AddImageAdapter.kt`, `res/layout/item_add_image`.
+* Misc
+  - The user can search images by pressing button
+  - The user can navigate to original image website by pressing image
+* Demo
 
 <p float="left">
 <img src="" width="400" height="800">
 <img src="" width="400" height="800">
 </p>
-
 
 ### **Tab 3. [Unknown]**    
 Tab that you can check how much you ate. [Unknown] is consisted with 2 fragments: *Login fragment* and *Main Fragment*. User can enter foods that they ate, and [Unknown] will visualize how much the user ate compared to user's BMR.
@@ -105,4 +108,4 @@ Tab that you can check how much you ate. [Unknown] is consisted with 2 fragments
 ## Contacts
 Contributors
 - Woojin, Lee, wjl0209@kaist.ac.kr
-- Sunwoo Kim, 선우 이메일
+- Sunwoo Kim, sunkim09@g.skku.edu

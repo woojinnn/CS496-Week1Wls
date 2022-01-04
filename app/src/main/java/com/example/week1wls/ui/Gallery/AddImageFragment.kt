@@ -40,6 +40,7 @@ import android.provider.MediaStore
 import android.provider.MediaStore.Video.query
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.AdapterView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.ActivityResultCallback
 
@@ -104,7 +105,6 @@ class AddImageFragment : Fragment() {
 
             inputQ.setText("")
         }
-
 
         fun goToSite(view: View, i: Int){
             var intent = Intent(Intent.ACTION_VIEW, Uri.parse(addImageadapter.data[i].pageURL))
