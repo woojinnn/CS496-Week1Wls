@@ -68,7 +68,7 @@ class LoginFragment : Fragment() {
                 655.1 + (9.56 * weight) + (1.85 * height) - (4.68 * age)
             }
 
-            val profile = Profile(name, height, weight, age, isMale, bmr, 0.toDouble())
+            val profile = Profile(name, height, weight, age, isMale, bmr)
 
             // Pass profile as shared Preference
             val spEditor = profileCache.edit()

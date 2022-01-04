@@ -40,8 +40,13 @@ class ApiFoodInfo(private val keyName: String): Thread() {
         }while (str!=null)
 
         // 전체가 객체로 묶여있기 때문에 객체형태로 가져옴
-        val root = JSONObject(buf.toString())
-        val items = root.getJSONObject("I2790").getJSONArray("row")
+        val root = JSONObject(buf.toString()).getJSONObject("I2790")
+
+        if(JSON_Parse(root, "total_count") == "0") {
+            return mutableListOf<FoodData>()
+        }
+
+        val items = root.getJSONArray("row")
 
         // return value
         val foodArr = mutableListOf<FoodData>()
@@ -68,7 +73,7 @@ class ApiFoodInfo(private val keyName: String): Thread() {
 
             val nutrList = listOf(nutrCont1, nutrCont2, nutrCont3, nutrCont4, nutrCont5, nutrCont6, nutrCont7, nutrCont8, nutrCont9)
             if(nutrList.size == nutrList.filterNotNull().size) {
-                val foodData = FoodData(foodName, servingWt!!, nutrCont1!!, nutrCont2!!, nutrCont3!!, nutrCont4!!, nutrCont5!!, nutrCont6!!, nutrCont7!!, nutrCont8!!, nutrCont9!!, makerName)
+                val foodData = FoodData(foodName, servingWt!!, nutrCont1!!, nutrCont2!!, nutrCont3!!, nutrCont4!!, nutrCont5!!, nutrCont6!!, nutrCont7!!, nutrCont8!!, nutrCont9!!, makerName, 0.toFloat())
                 foodArr.add(foodData)
             }
         }
