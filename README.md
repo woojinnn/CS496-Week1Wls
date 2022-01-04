@@ -3,7 +3,7 @@
 
 ## Introduction
 ### Abstraction
-**선우야 잠 좀 자자** is an Android-application that has 3 tabs: Contact, Gallery, [Unknown]. Overall, **선우야 잠 좀 자자** is implemented with navigation and fragments.
+**선우야 잠 좀 자자** is an Android-application that has 3 tabs: Contact, Gallery, 밥. Overall, **선우야 잠 좀 자자** is implemented with navigation and fragments.
 
 ### Development Envrionment
 - **IDE**: Android Studio
@@ -67,8 +67,10 @@ Tab that retrieves phone's contact list, and the user can search, add contact, c
     - The user can add contact by pressing button
     - When the user press the item for a long time, alertDialog will be shown so that user can enjoy activities.
 * Demo  
-[데모영상]  
-<img src="" width="400" height="800">
+<p float="left">
+<img src="./gifs/contact1.gif" width="400" height="800">
+<img src="./gifs/contact2.gif" width="400" height="800">
+</p>  
 
   
 ### **Tab 2. Custom Gallery**
@@ -89,8 +91,8 @@ Tab that user can search pixabay images and informations.
 <img src="" width="400" height="800">
 </p>
 
-### **Tab 3. [Unknown]**    
-Tab that you can check how much you ate. [Unknown] is consisted with 2 fragments: *Login fragment* and *Main Fragment*. User can enter foods that they ate, and [Unknown] will visualize how much the user ate compared to user's BMR as pie chart.
+### **Tab 3. 밥**    
+Tab that you can check how much you ate. 밥 is consisted with 2 fragments: *Login fragment* and *Main Fragment*. User can enter foods that they ate, and 밥 will visualize how much the user ate compared to user's BMR as pie chart.
 #### Login Fragment
 * Get user's physical data that is required for calculating BMR(Basal Metabolic Rate, 기초대사량)
 * This information contains: User name, height(cm), weight(kg), age, and sex.
@@ -102,7 +104,10 @@ Tab that you can check how much you ate. [Unknown] is consisted with 2 fragments
 1. Profile Information
 - Used [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) to visualize how much user ate compared to user BMR as Pie Chart.
 - Demo  
-[데모영상]
+<p>
+<img src="./gifs/bob_login.gif" width="400" height="800">
+<img src="./gifs/bob_loginedit.gif" width="400" height="800">
+</p>
 
 2. Searching 
 - Used [식품영양성분DB(NEW)](https://www.foodsafetykorea.go.kr/api/newDatasetDetail.do) that 식품의약품안전처 식품안전정보원 provides. You can get `Food maker name`, `nutrition informaiton`(including serving weight, total calories, carbohydrate, protein, fat, etc...). This information will be wrapped as `FoodData` data class
@@ -111,18 +116,13 @@ Tab that you can check how much you ate. [Unknown] is consisted with 2 fragments
 - For code that I use for API communication, please refer `healthcare/ApiFoodInfo.kt`
 - For code used for RecylerView, please refer `healthcare/HealthAdapter.kt`, `res/layout/item_food_data.xml`, 
 - Demo  
-[데모영상]
+|<img src="./gifs/bob1.gif" width="400" height="800">|<img src="./gifs/bob2.gif" width="400" height="800">|
 
 3. Misc
 - User can edit personal physcail profile by pressing button
 - User can see how much and what he/she ate during the day by pressing button
     - It will pop up alertDialog with lists
     - When the user press list element, the food user ate will be deleted
-- [데모영상]
-<p float="left">
-<img src="" width="400" height="800">
-<img src="" width="400" height="800">
-</p>  
 
 - To store data(user profile, food history), I used [gson](https://github.com/google/gson) for data class - string conversion.
 - For implementation details, please refer `healthcare/MainFragment.kt`, `healthcare/ApiFoodInfo.kt`, `healthcare/HealthAdapter.kt`
@@ -230,7 +230,7 @@ class ApiFoodInfo(private val keyName: String): Thread() {
 - Make additional fragment to visualize profile detail
 - 초성검색 구현 [(Useful Resource)](https://github.com/javafa/thisiskotlin/tree/master/1st_edition/SearchJaum)
 ### **2. Custom Gallery**
-### **3. [Unknown]**
+### **3. 밥**
 - Find exercise calories api, and subtarct from the total calories
 - Provide detailed nutrition information
 - Add animation
